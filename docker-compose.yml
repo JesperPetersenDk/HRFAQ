@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  blazorhrfaq:
+    image: ${DOCKER_REGISTRY-}blazorhrfaq
+    build:
+      context: .
+      dockerfile: BlazorHrFaq/Dockerfile
