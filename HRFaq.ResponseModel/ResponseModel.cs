@@ -1,6 +1,7 @@
-﻿using System.Collections;
+﻿using Helpers.ResponseModel.Enum;
+using System.Collections;
 
-namespace HRFaq.ResponseModel
+namespace Helpers.ResponseModel
 {
     public class ResponseModel
     {

@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\HRFaq.ResponseModel\HRFaq.ResponseModel.csproj" />
+  </ItemGroup>
+
 </Project>

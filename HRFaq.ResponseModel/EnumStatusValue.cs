@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HRFaq.ResponseModel
+namespace Helpers.ResponseModel.Enum
 {
     public enum EnumStatusValue
     {
