@@ -21,8 +21,13 @@ namespace BlazorHrFaq.Database
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("");
+                optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=hrfaq;Trusted_Connection=True;");
             }
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
         }
     }
 }
