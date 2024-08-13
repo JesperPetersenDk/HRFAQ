@@ -1,5 +1,4 @@
-﻿using Helpers.ResponseModel.Enum;
-using System.Collections;
+﻿using System.Collections;
 
 namespace Helpers.ResponseModel
 {
@@ -26,5 +25,14 @@ namespace Helpers.ResponseModel
     public class ResponseDataModel<T>
     {
         public ResponseModel<T> Data { get; set; }
+    }
+
+    public enum EnumStatusValue
+    {
+        Info = 0,
+        Success = 1,
+        Failed = 2,
+        Error = 3,
+        Unknown = 10
     }
 }

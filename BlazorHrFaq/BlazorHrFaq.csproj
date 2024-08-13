@@ -13,4 +13,9 @@
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.19.6" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\HRFaq.Faq.Service\HRFaq.Faq.Service.csproj" />
+    <ProjectReference Include="..\HRFaq.Loggning.Service\HRFaq.Loggning.Service.csproj" />
+  </ItemGroup>
+
 </Project>

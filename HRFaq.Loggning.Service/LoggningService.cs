@@ -1,5 +1,4 @@
 ﻿using Helpers.ResponseModel;
-using Helpers.ResponseModel.Enum;
 using Microsoft.Extensions.Configuration;
 using Serilog;
 using Serilog.Core;
