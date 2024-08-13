@@ -14,17 +14,19 @@ namespace HRFaq.Loggning.Service
     public class LoggningService : ILoggningService
     {
         private readonly ILogger _logger;
+        private readonly IConfiguration _configuration;
+
         public LoggningService(IConfiguration configuration)
         {
-            var logMode = configuration.GetValue<int>("Serilog:LogMode");
-            var loggerConfig = new LoggerConfiguration()
-                .ReadFrom.Configuration(configuration);
+            _configuration = configuration;
+            var logMode = _configuration.GetValue<int>("Serilog:LogMode");
+            var loggerConfig = new LoggerConfiguration().ReadFrom.Configuration(configuration);
 
             if (logMode == 1 || logMode == 3)
             {
                 // File logging
                 loggerConfig.WriteTo.File(
-                    path: configuration["Serilog:File:Path"],
+                    path: _configuration.GetSection("Serilog:File:Path").Value,
                     rollingInterval: RollingInterval.Day);
             }
 
@@ -32,8 +34,8 @@ namespace HRFaq.Loggning.Service
             {
                 // Database logging
                 loggerConfig.WriteTo.MSSqlServer(
-                    connectionString: configuration["Database:ConnectionString"],
-                    tableName: configuration["Serilog:DatabaseSerilog:TableName"],
+                    connectionString: _configuration.GetSection("Database:ConnectionString").Value,
+                    tableName: _configuration.GetSection("Serilog:DatabaseSerilog:TableName").Value,
                     autoCreateSqlTable: true);
             }
 
