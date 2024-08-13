@@ -1,10 +1,17 @@
 using BlazorHrFaq.Components;
+using HRFaq.Faq.Service;
+using HRFaq.Loggning.Service;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
+
+
+builder.Services.AddSingleton<ILoggningService, LoggningService>();
+builder.Services.AddSingleton<IFaqService, FaqService>();
+
 
 var app = builder.Build();
 

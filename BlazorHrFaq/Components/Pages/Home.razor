@@ -1,5 +1,7 @@
 ﻿@page "/"
 
+@inject ILoggningService _log
+
 <PageTitle>Home</PageTitle>
 
 
@@ -13,3 +15,11 @@
     her
 
 </div>
+
+@code {
+    protected override Task OnInitializedAsync()
+    {
+        _log.Log("Test", EnumStatusValue.Success);
+        return base.OnInitializedAsync();
+    }
+}
