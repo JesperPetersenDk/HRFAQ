@@ -33,7 +33,7 @@ namespace HRFaq.Loggning.Service
             {
                 // Database logging
                 loggerConfig.WriteTo.MSSqlServer(
-                    connectionString: _configuration.GetSection("Database:ConnectionString").Value,
+                    connectionString: _configuration.GetSection("ConnectionStrings:ConnectionString").Value,
                     tableName: _configuration.GetSection("Serilog:DatabaseSerilog:TableName").Value,
                     autoCreateSqlTable: true);
             }
