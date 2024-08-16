@@ -1,15 +1,17 @@
 ﻿using BlazorHrFaq.Database.Model;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 namespace BlazorHrFaq.Database
 {
     public class DatabaseDb : DbContext
     {
+        private readonly string _connectionString;
         public DbSet<Faq> Faq { get; set; }
 
-        public DatabaseDb()
+        public DatabaseDb(IConfiguration configuration)
         {
-
+            _connectionString = configuration.GetConnectionString("ConnectionString");
         }
 
         public DatabaseDb(DbContextOptions<DatabaseDb> options) : base(options)
@@ -21,7 +23,7 @@ namespace BlazorHrFaq.Database
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=hrfaq;Trusted_Connection=True;");
+                optionsBuilder.UseSqlServer(_connectionString);
             }
         }
 
