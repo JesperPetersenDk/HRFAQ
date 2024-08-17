@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BlazorHrFaq.Database.Migrations
 {
     [DbContext(typeof(DatabaseDb))]
-    [Migration("20240810005308_test2")]
-    partial class test2
+    [Migration("20240817193119_JesperDb02")]
+    partial class JesperDb02
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -51,6 +51,35 @@ namespace BlazorHrFaq.Database.Migrations
                     b.HasKey("FaqId");
 
                     b.ToTable("Faq");
+
+                    b.HasData(
+                        new
+                        {
+                            FaqId = new Guid("0868c46c-1560-4258-b9a1-e4d6a698bc8e"),
+                            Answer = "Hello world",
+                            HitCount = 1,
+                            LastUpdate = new DateTime(2024, 8, 17, 21, 31, 19, 277, DateTimeKind.Local).AddTicks(8190),
+                            Priority = 1,
+                            SearchWords = "Hej"
+                        },
+                        new
+                        {
+                            FaqId = new Guid("8389b381-da41-4ba8-870a-a9b5ed138ef2"),
+                            Answer = "Hello world",
+                            HitCount = 1,
+                            LastUpdate = new DateTime(2024, 8, 17, 21, 31, 19, 277, DateTimeKind.Local).AddTicks(8239),
+                            Priority = 1,
+                            SearchWords = "Jesper"
+                        },
+                        new
+                        {
+                            FaqId = new Guid("cd5d5a55-74af-41a4-804f-9c1b8e6bfd49"),
+                            Answer = "Hello world",
+                            HitCount = 1,
+                            LastUpdate = new DateTime(2024, 8, 17, 21, 31, 19, 277, DateTimeKind.Local).AddTicks(8242),
+                            Priority = 1,
+                            SearchWords = "Test"
+                        });
                 });
 #pragma warning restore 612, 618
         }

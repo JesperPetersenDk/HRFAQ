@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -11,7 +12,8 @@ namespace BlazorHrFaq.Database.Model
     public class Faq
     {
         [Key]
-        public Guid FaqId { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public Guid FaqId { get; set; } = Guid.NewGuid();
         public string SearchWords { get; set; }
         public string Answer { get; set; }
         public DateTime? LastUpdate { get; set; }
