@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace BlazorHrFaq.Database.Migrations
 {
     /// <inheritdoc />
-    public partial class test1 : Migration
+    public partial class JesperDb01 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

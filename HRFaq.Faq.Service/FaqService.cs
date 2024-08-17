@@ -1,38 +1,56 @@
-﻿using System.Text.RegularExpressions;
+﻿using BlazorHrFaq.Database.Infrastructure;
+using BlazorHrFaq.TextHelper;
+using Helpers.ResponseModel;
+using System.Text.RegularExpressions;
+using System.Windows.Input;
 
 namespace HRFaq.Faq.Service
 {
     public interface IFaqService
     {
-        List<string> GetSearchWordsList(string searchWords);
-        List<string> GetAnswersList(string answers);
+        Task<ResponseModel> GetAnswersList(string answers);
     }
 
     public class FaqService : IFaqService
     {
-        // Hjælpefunktion til at opdele en streng ved {} eller {{}}
-        private List<string> SplitStringByDelimiters(string input)
+        private readonly ICommands _com;
+        public FaqService(ICommands command)
         {
-            if (string.IsNullOrEmpty(input))
-                return new List<string>();
-
-            // Brug Regex til at splitte på {} eller {{}}
-            string pattern = @"\{\{.*?\}\}|\{.*?\}";
-            var matches = Regex.Matches(input, pattern);
-
-            return matches.Select(m => m.Value.Trim('{', '}')).ToList();
+            _com = command;
         }
-
-        // Funktion til at hente liste over søgeord
-        public List<string> GetSearchWordsList(string searchWords)
+        public async Task<ResponseModel> GetAnswersList(string answers)
         {
-            return SplitStringByDelimiters(searchWords);
-        }
-
-        // Funktion til at hente liste over svar
-        public List<string> GetAnswersList(string answers)
-        {
-            return SplitStringByDelimiters(answers);
+            var result = new ResponseDataModel();
+            try
+            {
+                var resultData = await _com.GetFaq(answers);
+                if(resultData != null)
+                {
+                    result.Data = new ResponseModel()
+                    {
+                        Message = "Show data to user",
+                        Status = EnumStatusValue.Success,
+                        GetData = new[] { resultData }
+                    };
+                }
+                else
+                {
+                    result.Data = new ResponseModel()
+                    {
+                        Message = TextHelperResFile.NotAnswersToUser.ToString().ReplaceText(answers),
+                        Status = EnumStatusValue.Failed,
+                    };
+                }
+            }
+            catch (Exception ex)
+            {
+                result.Data = new ResponseModel()
+                {
+                    Message = $"{ex.Message} - {ex}",
+                    Status = EnumStatusValue.Error,
+                };
+            }
+            return result.Data;
         }
     }
 }
