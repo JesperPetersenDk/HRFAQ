@@ -9,8 +9,14 @@
   <div class="mx-auto max-w-3xl text-center">
     <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">@TextHelperResFile.TopTitleText.ReplaceText(null)</h2>
     <p class="leading-8 mt-2 text-lg text-gray-600">@TextHelperResFile.TopDeckText.ReplaceText(null)</p>
+  @if(showAlert)
+    {
+        <div class="bg-red-500 rounded-lg text-white p-2 mb-1">
+            @message
+        </div>
+    }
   </div>
-<EditForm Model="@searchModel" FormName="searchHome" OnSubmit="HandleSubmitSearch" class="mx-auto mt-4 max-w-xl">
+<EditForm Model="@searchModel" FormName="searchHome" OnSubmit="HandleSubmitSearch" class="mx-auto mt-4 max-w-3xl">
     <div class="grid-cols-1 grid gap-x-8 gap-y-6 sm:grid-cols-2">
         <div class="sm:col-span-2">
             <div class="mt-2.5">
@@ -35,13 +41,21 @@
     {
         Text = string.Empty
     };
+    public bool showAlert { get; set; } = false;
+    public string message { get; set; } = string.Empty;
 
     private async Task HandleSubmitSearch()
     {
         var resultData = await _faq.GetAnswersList(searchModel.Text);
         if(resultData.Status == EnumStatusValue.Success)
         {
-            
+            showAlert = false;
+        }
+        else
+        {
+            showAlert = true;
+            message = resultData.Message;
+            searchModel.Text = string.Empty;
         }
     }
 

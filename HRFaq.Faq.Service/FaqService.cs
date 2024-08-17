@@ -24,7 +24,7 @@ namespace HRFaq.Faq.Service
             try
             {
                 var resultData = await _com.GetFaq(answers);
-                if(resultData != null)
+                if(resultData != null && resultData.Count > 0)
                 {
                     result.Data = new ResponseModel()
                     {
