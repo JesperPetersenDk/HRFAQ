@@ -17,7 +17,7 @@
     <ProjectReference Include="..\HRFaq.Faq.Service\BlazorHrFaq.Faq.Service.csproj" />
     <ProjectReference Include="..\HRFaq.Loggning.Service\BlazorHrFaq.Loggning.Service.csproj" />
     <ProjectReference Include="..\HrFaq.TextHelper\BlazorHrFaq.TextHelper.csproj" />
-    <ProjectReference Include="..\ViewModel\BlazorHrFaq.ViewModel.csproj" />
+    <ProjectReference Include="..\ViewModel\BlazorHrFaq.Faq.Model.csproj" />
   </ItemGroup>
 
 </Project>

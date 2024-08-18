@@ -123,6 +123,9 @@
   <data name="PlaceholderTextInput" xml:space="preserve">
     <value>Stille spørgsmål her.</value>
   </data>
+  <data name="SearchTextHome" xml:space="preserve">
+    <value>Søgning efter:</value>
+  </data>
   <data name="Sitename" xml:space="preserve">
     <value>Jesper HR Faq</value>
   </data>

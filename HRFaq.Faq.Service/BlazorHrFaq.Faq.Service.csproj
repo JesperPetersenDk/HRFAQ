@@ -10,6 +10,7 @@
     <ProjectReference Include="..\BlazorHrFaq.Database.Infrastructure\BlazorHrFaq.Database.Infrastructure.csproj" />
     <ProjectReference Include="..\HRFaq.ResponseModel\BlazorHrFaq.ResponseModel.csproj" />
     <ProjectReference Include="..\HrFaq.TextHelper\BlazorHrFaq.TextHelper.csproj" />
+    <ProjectReference Include="..\ViewModel\BlazorHrFaq.Faq.Model.csproj" />
   </ItemGroup>
 
 </Project>

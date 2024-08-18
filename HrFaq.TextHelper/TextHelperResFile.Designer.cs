@@ -79,6 +79,15 @@ namespace BlazorHrFaq.TextHelper {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Søgning efter:.
+        /// </summary>
+        public static string SearchTextHome {
+            get {
+                return ResourceManager.GetString("SearchTextHome", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Jesper HR Faq.
         /// </summary>
         public static string Sitename {

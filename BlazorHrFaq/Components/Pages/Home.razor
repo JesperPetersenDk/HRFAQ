@@ -9,9 +9,9 @@
   <div class="mx-auto max-w-3xl text-center">
     <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">@TextHelperResFile.TopTitleText.ReplaceText(null)</h2>
     <p class="leading-8 mt-2 text-lg text-gray-600">@TextHelperResFile.TopDeckText.ReplaceText(null)</p>
-  @if(showAlert)
+    @if(showAlert)
     {
-        <div class="bg-red-500 rounded-lg text-white p-2 mb-1">
+        <div class="mb-1 rounded-lg bg-red-500 p-2 text-white">
             @message
         </div>
     }
@@ -33,7 +33,28 @@
         </button>
     </div>
 </EditForm>
-    
+
+@if(searchData)
+{
+    <div class="mx-auto mt-4 max-w-3xl">
+        <p class="uppercase font-bold">@TextHelperResFile.SearchTextHome @modelData.SearchWord</p>
+        @if(modelDataList.Count > 0)
+        {
+            <div class="bg-white shadow-lg mt-3 rounded-lg overflow-hidden">
+                <ul class="divide-y divide-gray-200">
+                    @foreach (var item in modelDataList)
+                    {
+                        <li class="p-3 flex justify-between items-center user-card">
+                            <div class="flex items-center">
+                                <span class="ml-3 font-medium">@item.Answer</span>
+                            </div>
+                        </li>
+                    }
+                </ul>
+            </div>
+        }
+    </div>
+}
 
 @code {
     [SupplyParameterFromForm]
@@ -41,18 +62,38 @@
     {
         Text = string.Empty
     };
+    public bool searchData { get; set; } = false;
     public bool showAlert { get; set; } = false;
     public string message { get; set; } = string.Empty;
+
+    ListItemModel modelData = new ListItemModel();
+    List<ListWithSearchDataModel> modelDataList = new List<ListWithSearchDataModel>();
 
     private async Task HandleSubmitSearch()
     {
         var resultData = await _faq.GetAnswersList(searchModel.Text);
         if(resultData.Status == EnumStatusValue.Success)
         {
+            searchData = true;
             showAlert = false;
+            var dataResult = resultData.GetData.Cast<ListItemModel>().FirstOrDefault();
+            if(dataResult != null)
+            {
+                modelData.SearchWord = dataResult.SearchWord;
+                var listItem = dataResult.data.Cast<ListWithSearchDataModel>().ToList();
+                foreach (var item in listItem)
+                {
+                    modelDataList.Add(new ListWithSearchDataModel
+                    {
+                        Answer = item.Answer,
+                        HitCount = item.HitCount
+                    });
+                }
+            }
         }
         else
         {
+            searchData = false;
             showAlert = true;
             message = resultData.Message;
             searchModel.Text = string.Empty;
@@ -61,7 +102,7 @@
 
     protected override Task OnInitializedAsync()
     {
-        _log.Log("Test", EnumStatusValue.Success);
+        _log.Log("User show the page.", EnumStatusValue.Info);
         return base.OnInitializedAsync();
     }
 }
