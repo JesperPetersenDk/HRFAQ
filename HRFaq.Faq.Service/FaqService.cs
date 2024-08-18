@@ -1,4 +1,5 @@
 ﻿using BlazorHrFaq.Database.Infrastructure;
+using BlazorHrFaq.Faq.Model;
 using BlazorHrFaq.TextHelper;
 using Helpers.ResponseModel;
 using System.Text.RegularExpressions;
@@ -24,13 +25,28 @@ namespace HRFaq.Faq.Service
             try
             {
                 var resultData = await _com.GetFaq(answers);
-                if(resultData != null)
+                if(resultData != null && resultData.Count > 0)
                 {
+                    //Add Item to model
+                    ListItemModel listItemModel = new ListItemModel();
+                    listItemModel.SearchWord = answers;
+                    listItemModel.data = new List<ListWithSearchDataModel>();
+                    //Add Item to list of model
+                    foreach (var item in resultData)
+                    {
+                        listItemModel.data.Add(new ListWithSearchDataModel
+                        {
+                            Answer = item.Answer,
+                            HitCount = item.HitCount,
+                        });
+                    }
+
+
                     result.Data = new ResponseModel()
                     {
                         Message = "Show data to user",
                         Status = EnumStatusValue.Success,
-                        GetData = new[] { resultData }
+                        GetData = new[] { listItemModel }
                     };
                 }
                 else

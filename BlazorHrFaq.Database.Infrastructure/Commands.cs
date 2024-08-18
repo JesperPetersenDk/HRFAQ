@@ -13,10 +13,20 @@ namespace BlazorHrFaq.Database.Infrastructure
         {
             using(var db = new DatabaseDb())
             {
-                return await db.Faq
+                var resultData = await db.Faq
                             .Where(r => r.SearchWords.Contains(text))
                             .OrderByDescending(r => r.Priority)
                             .ToListAsync(); // Sorter efter Priority fra højeste til laveste
+                if(resultData != null)
+                {
+                    foreach(var result in resultData)
+                    {
+                        result.HitCount++;
+                        await db.SaveChangesAsync();
+                    }
+                    return resultData;
+                }
+                return null;                
             }
         }
     }
