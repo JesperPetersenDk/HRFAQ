@@ -37,14 +37,14 @@
 @if(searchData)
 {
     <div class="mx-auto mt-4 max-w-3xl">
-        <p class="uppercase font-bold">@TextHelperResFile.SearchTextHome @modelData.SearchWord</p>
+        <p class="font-bold uppercase">@TextHelperResFile.SearchTextHome @modelData.SearchWord</p>
         @if(modelDataList.Count > 0)
         {
-            <div class="bg-white shadow-lg mt-3 rounded-lg overflow-hidden">
+            <div class="mt-3 overflow-hidden rounded-lg bg-white shadow-lg">
                 <ul class="divide-y divide-gray-200">
                     @foreach (var item in modelDataList)
                     {
-                        <li class="p-3 flex justify-between items-center user-card">
+                        <li class="user-card flex items-center justify-between p-3">
                             <div class="flex items-center">
                                 <span class="ml-3 font-medium">@item.Answer</span>
                             </div>
