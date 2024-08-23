@@ -15,7 +15,6 @@ namespace BlazorHrFaq.Database.Model
         public Guid MatchId { get; set; } = Guid.NewGuid();
         public string Value { get; set; } //Url to site, image url or other.
         public string Text { get; set; } //Text to link, value to image or other.
-        public string Type { get; set; } //Link, Img, PDFfile
         public string CodeValue { get; set; } // Random code value to user
     }
 }

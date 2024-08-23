@@ -117,6 +117,15 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AddInformation" xml:space="preserve">
+    <value>Tilføj Information</value>
+  </data>
+  <data name="AddText" xml:space="preserve">
+    <value>Tilføj tekst til indholdet</value>
+  </data>
+  <data name="AddValue" xml:space="preserve">
+    <value>Tilføj url til billede, link eller PDF.</value>
+  </data>
   <data name="NotAnswersToUser" xml:space="preserve">
     <value>Dit spørgsmål findes ikke i systemet hos {sitename} - Prøv igen: {searchword}</value>
   </data>
@@ -139,7 +148,13 @@
   <data name="TopDeckText" xml:space="preserve">
     <value>Ønsker at du at opnå besvarelse på dine spørgsmål - {titlename} besvare dine spørgsmål!</value>
   </data>
+  <data name="TopDeckTextMatch" xml:space="preserve">
+    <value>Her vil du kun tildele links, billeder og pdf filer til.</value>
+  </data>
   <data name="TopTitleText" xml:space="preserve">
     <value>{titlename} - Still din spørgsmål.</value>
+  </data>
+  <data name="TopTitleTextMatch" xml:space="preserve">
+    <value>Opret match indhold</value>
   </data>
 </root>

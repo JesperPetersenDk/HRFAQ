@@ -1,0 +1,55 @@
+﻿@page "/matchword"
+
+<div class="mx-auto max-w-3xl text-center">
+    <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">@TextHelperResFile.TopTitleTextMatch.ReplaceText(null)</h2>
+    <p class="leading-8 mt-2 text-lg text-gray-600">@TextHelperResFile.TopDeckTextMatch.ReplaceText(null)</p>
+    @if (showAlert)
+    {
+        <div class="mb-1 rounded-lg bg-red-500 p-2 text-white">
+            @message
+        </div>
+    }
+</div>
+<EditForm Model="@matchitemModel" FormName="searchHome" OnSubmit="HandleSubmitMatch" class="mx-auto mt-4 max-w-3xl">
+    <div class="grid-cols-1 grid gap-x-8 gap-y-6 sm:grid-cols-4">
+        <div class="sm:col-span-2">
+            <div class="mt-2.5">
+                <InputText class="w-full rounded-lg border border-gray-200 bg-gray-200 px-4 py-3 text-sm focus:bg-gray-100 focus:outline-none focus:border-purple-400"
+                           @bind-Value="matchitemModel.Value"
+                           type="text"
+                           placeholder="@TextHelperResFile.AddValue" />
+            </div>
+        </div>
+        <div class="sm:col-span-2">
+            <div class="mt-2.5">
+                <InputText class="w-full rounded-lg border border-gray-200 bg-gray-200 px-4 py-3 text-sm focus:bg-gray-100 focus:outline-none focus:border-purple-400"
+                           @bind-Value="matchitemModel.Text"
+                           type="text"
+                           placeholder="@TextHelperResFile.AddText" />
+            </div>
+        </div>
+    </div>
+    <div class="mt-4">
+        <button type="submit" class="block w-full rounded-md bg-green-600 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+            @TextHelperResFile.AddInformation
+        </button>
+    </div>
+</EditForm>
+
+@code {
+    [SupplyParameterFromForm]
+    MatchModel matchitemModel { get; set; } = new MatchModel
+        {
+            Text = string.Empty,
+            Value = string.Empty
+        };
+
+    public bool searchData { get; set; } = false;
+    public bool showAlert { get; set; } = false;
+    public string message { get; set; } = string.Empty;
+
+    private async Task HandleSubmitMatch()
+    {
+        
+    }
+}

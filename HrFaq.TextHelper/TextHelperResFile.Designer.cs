@@ -61,6 +61,33 @@ namespace BlazorHrFaq.TextHelper {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Tilføj Information.
+        /// </summary>
+        public static string AddInformation {
+            get {
+                return ResourceManager.GetString("AddInformation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tilføj tekst til indholdet.
+        /// </summary>
+        public static string AddText {
+            get {
+                return ResourceManager.GetString("AddText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tilføj url til billede, link eller PDF..
+        /// </summary>
+        public static string AddValue {
+            get {
+                return ResourceManager.GetString("AddValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Dit spørgsmål findes ikke i systemet hos {sitename} - Prøv igen: {searchword}.
         /// </summary>
         public static string NotAnswersToUser {
@@ -124,11 +151,29 @@ namespace BlazorHrFaq.TextHelper {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Her vil du kun tildele links, billeder og pdf filer til..
+        /// </summary>
+        public static string TopDeckTextMatch {
+            get {
+                return ResourceManager.GetString("TopDeckTextMatch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {titlename} - Still din spørgsmål..
         /// </summary>
         public static string TopTitleText {
             get {
                 return ResourceManager.GetString("TopTitleText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Opret match indhold.
+        /// </summary>
+        public static string TopTitleTextMatch {
+            get {
+                return ResourceManager.GetString("TopTitleTextMatch", resourceCulture);
             }
         }
     }
