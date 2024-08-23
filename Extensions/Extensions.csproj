@@ -6,9 +6,4 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\BlazorHrFaq.Database\BlazorHrFaq.Database.csproj" />
-    <ProjectReference Include="..\Extensions\Extensions.csproj" />
-  </ItemGroup>
-
 </Project>

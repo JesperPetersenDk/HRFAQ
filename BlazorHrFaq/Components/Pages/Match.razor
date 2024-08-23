@@ -1,5 +1,8 @@
 ﻿@page "/matchword"
 
+@inject ILoggningService _log
+@inject IFaqService _faq
+
 <div class="mx-auto max-w-3xl text-center">
     <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">@TextHelperResFile.TopTitleTextMatch.ReplaceText(null)</h2>
     <p class="leading-8 mt-2 text-lg text-gray-600">@TextHelperResFile.TopDeckTextMatch.ReplaceText(null)</p>
@@ -34,6 +37,30 @@
             @TextHelperResFile.AddInformation
         </button>
     </div>
+    @if (modelList.Count() > 0)
+    {
+        <div class="mt-3">
+            <table class="table-auto">
+                <thead>
+                    <tr>
+                        <th>Kode</th>
+                        <th>Link</th>
+                        <th>Tekst</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in modelList)
+                    {
+                        <tr>
+                            <td class="py-2 px-4">@item.CodeValue</td>
+                            <td class="py-2 px-4">@item.Value</td>
+                            <td class="py-2 px-4">@item.Text</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
 </EditForm>
 
 @code {
@@ -48,8 +75,48 @@
     public bool showAlert { get; set; } = false;
     public string message { get; set; } = string.Empty;
 
+
+    MatchViewModel model = new MatchViewModel();
+    List<MatchListViewModel> modelList = new List<MatchListViewModel>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+        var resultData = await _faq.GetMatchWord();
+        if (resultData.Status == EnumStatusValue.Success)
+        {
+            var dataResult = resultData.GetData.Cast<MatchViewModel>().FirstOrDefault();
+            if (dataResult != null)
+            {
+                if (dataResult.data.Count > 0)
+                {
+                    var listItem = dataResult.data.Cast<MatchListViewModel>().ToList();
+                    foreach (var item in listItem)
+                    {
+                        modelList.Add(new MatchListViewModel
+                            {
+                                Text = item.Text,
+                                CodeValue = item.CodeValue,
+                                Value = item.Value
+                            });
+                    }
+                }
+            }
+        }
+    }
+
     private async Task HandleSubmitMatch()
     {
-        
+        var resultData = await _faq.MatchWord(matchitemModel);
+        if (resultData.Status == EnumStatusValue.Info)
+        {
+            var dataResult = resultData.GetData.Cast<MatchViewModel>().FirstOrDefault();
+            if (dataResult != null)
+            {
+                model.Code = dataResult.Code;
+                matchitemModel.Value = string.Empty;
+                matchitemModel.Text = string.Empty;
+            }
+        }
     }
 }
