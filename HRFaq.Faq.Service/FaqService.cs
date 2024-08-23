@@ -10,6 +10,8 @@ namespace HRFaq.Faq.Service
     public interface IFaqService
     {
         Task<ResponseModel> GetAnswersList(string answers);
+        Task<ResponseModel> MatchWord(MatchModel model);
+        Task<ResponseModel> GetMatchWord();
     }
 
     public class FaqService : IFaqService
@@ -19,6 +21,35 @@ namespace HRFaq.Faq.Service
         {
             _com = command;
         }
+
+        public async Task<ResponseModel> MatchWord(MatchModel model)
+        {
+            var result = new ResponseDataModel();
+            try
+            {
+                var resultData = await _com.AddMatchData(model.Text, model.Value);
+                int returnBoolData = resultData.Item1;
+                MatchViewModel dataModel = new MatchViewModel();
+                dataModel.Code = resultData.Item2;
+
+                result.Data = new ResponseModel()
+                {
+                    Message = (returnBoolData > 0) ? "Succes to save in database" : "Error to add in MatchData - Database",
+                    Status = EnumStatusValue.Info,
+                    GetData = new[] { dataModel }
+                };
+            }
+            catch (Exception ex)
+            {
+                result.Data = new ResponseModel()
+                {
+                    Message = $"{ex.Message} - {ex}",
+                    Status = EnumStatusValue.Error,
+                };
+            }
+            return result.Data;
+        }
+
         public async Task<ResponseModel> GetAnswersList(string answers)
         {
             var result = new ResponseDataModel();
@@ -57,6 +88,41 @@ namespace HRFaq.Faq.Service
                         Status = EnumStatusValue.Failed,
                     };
                 }
+            }
+            catch (Exception ex)
+            {
+                result.Data = new ResponseModel()
+                {
+                    Message = $"{ex.Message} - {ex}",
+                    Status = EnumStatusValue.Error,
+                };
+            }
+            return result.Data;
+        }
+
+        public async Task<ResponseModel> GetMatchWord()
+        {
+            var result = new ResponseDataModel();
+            try
+            {
+                MatchViewModel dataModel = new MatchViewModel();
+                dataModel.data = new List<MatchListViewModel>();
+                var listData = await _com.GetMatchData();
+                foreach (var item in listData)
+                {
+                    dataModel.data.Add(new MatchListViewModel
+                    {
+                        CodeValue = item.CodeValue,
+                        Text = item.Text,
+                        Value = item.Value
+                    });
+                }
+                result.Data = new ResponseModel()
+                {
+                    Message = "Show list to user",
+                    Status = EnumStatusValue.Success,
+                    GetData = new[] { dataModel }
+                };
             }
             catch (Exception ex)
             {

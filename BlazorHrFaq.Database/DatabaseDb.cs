@@ -7,6 +7,7 @@ namespace BlazorHrFaq.Database
     public class DatabaseDb : DbContext
     {
         public DbSet<Faq> Faq { get; set; }
+        public DbSet<MatchData> Match { get; set; }
         public DatabaseDb(DbContextOptions<DatabaseDb> options) : base(options)
         {
 
@@ -27,6 +28,8 @@ namespace BlazorHrFaq.Database
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<MatchData>().HasKey(r => r.MatchId);
 
             modelBuilder.Entity<Faq>().HasKey(r => r.FaqId);
 

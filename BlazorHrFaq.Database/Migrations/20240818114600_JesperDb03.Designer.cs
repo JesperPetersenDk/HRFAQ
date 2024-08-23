@@ -4,6 +4,7 @@ using BlazorHrFaq.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BlazorHrFaq.Database.Migrations
 {
     [DbContext(typeof(DatabaseDb))]
-    partial class DatabaseDbModelSnapshot : ModelSnapshot
+    [Migration("20240818114600_JesperDb03")]
+    partial class JesperDb03
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -52,28 +55,28 @@ namespace BlazorHrFaq.Database.Migrations
                     b.HasData(
                         new
                         {
-                            FaqId = new Guid("4be51388-febd-48a3-be7f-ce7f22daa4f8"),
+                            FaqId = new Guid("2704f6b3-acf3-4905-9410-9a18aac09c63"),
                             Answer = "Hello world",
                             HitCount = 1,
-                            LastUpdate = new DateTime(2024, 8, 23, 21, 15, 23, 464, DateTimeKind.Local).AddTicks(5298),
+                            LastUpdate = new DateTime(2024, 8, 18, 13, 45, 59, 956, DateTimeKind.Local).AddTicks(5295),
                             Priority = 1,
                             SearchWords = "Hej"
                         },
                         new
                         {
-                            FaqId = new Guid("f33b61a9-10c1-4213-a381-f8b1c92098f6"),
+                            FaqId = new Guid("bd0d38d4-ca3e-4a40-8c14-2a2b49555ffa"),
                             Answer = "Hello world",
                             HitCount = 1,
-                            LastUpdate = new DateTime(2024, 8, 23, 21, 15, 23, 464, DateTimeKind.Local).AddTicks(5428),
+                            LastUpdate = new DateTime(2024, 8, 18, 13, 45, 59, 956, DateTimeKind.Local).AddTicks(5352),
                             Priority = 1,
                             SearchWords = "Jesper"
                         },
                         new
                         {
-                            FaqId = new Guid("9dbfad93-3b86-48c7-9cf2-b1740f547088"),
+                            FaqId = new Guid("298eadaf-0404-4bda-9cb1-f1786fae93fe"),
                             Answer = "Hello world",
                             HitCount = 1,
-                            LastUpdate = new DateTime(2024, 8, 23, 21, 15, 23, 464, DateTimeKind.Local).AddTicks(5431),
+                            LastUpdate = new DateTime(2024, 8, 18, 13, 45, 59, 956, DateTimeKind.Local).AddTicks(5355),
                             Priority = 1,
                             SearchWords = "Test"
                         });
@@ -85,11 +88,11 @@ namespace BlazorHrFaq.Database.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("CodeValue")
+                    b.Property<string>("Text")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Text")
+                    b.Property<string>("Type")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
