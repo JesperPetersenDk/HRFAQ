@@ -2,6 +2,7 @@
 
 @inject ILoggningService _log
 @inject IFaqService _faq
+@inject NavigationManager nav
 
 <div class="mx-auto max-w-3xl text-center">
     <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">@TextHelperResFile.TopTitleAnswer.ReplaceText(null)</h2>
@@ -83,7 +84,10 @@
         status = createFaq.Status;
         if(createFaq.Status == EnumStatusValue.Success)
         {
-            
+
+
+            //Reload page
+            nav.NavigateTo("answer");
         }
         else
         {

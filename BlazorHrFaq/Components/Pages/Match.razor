@@ -2,6 +2,7 @@
 
 @inject ILoggningService _log
 @inject IFaqService _faq
+@inject NavigationManager nav
 
 <div class="mx-auto max-w-3xl text-center">
     <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">@TextHelperResFile.TopTitleTextMatch.ReplaceText(null)</h2>
@@ -113,8 +114,8 @@
             if (dataResult != null)
             {
                 model.Code = dataResult.Code;
-                matchitemModel.Value = string.Empty;
-                matchitemModel.Text = string.Empty;
+                //Reload page
+                nav.NavigateTo("matchword");
             }
         }
     }
