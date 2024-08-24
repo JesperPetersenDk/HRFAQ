@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BlazorHrFaq.Faq.Model
+namespace FaqModel
 {
     public class MatchViewModel
     {

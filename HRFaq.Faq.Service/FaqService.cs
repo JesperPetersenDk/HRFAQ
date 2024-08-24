@@ -1,5 +1,5 @@
 ﻿using BlazorHrFaq.Database.Infrastructure;
-using BlazorHrFaq.Faq.Model;
+using FaqModel;
 using BlazorHrFaq.TextHelper;
 using Helpers.ResponseModel;
 using System.Text.RegularExpressions;
