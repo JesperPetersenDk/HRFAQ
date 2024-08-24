@@ -1,0 +1,44 @@
+﻿@if (Status == EnumStatusValue.Unknown && Message != string.Empty)
+{
+    color += "mb-1 rounded-lg p-2 text-white bg-slate-500";
+    <div class=@color>
+        @Message
+    </div>
+}
+else if (Status == EnumStatusValue.Info && Message != string.Empty)
+{
+    color += "mb-1 rounded-lg p-2 text-white bg-sky-500";
+    <div class=@color>
+        @Message
+    </div>
+}
+else if (Status == EnumStatusValue.Success && Message != string.Empty)
+{
+    color += "mb-1 rounded-lg p-2 text-white bg-green-500";
+    <div class=@color>
+        @Message
+    </div>
+}
+else if (Status == EnumStatusValue.Failed && Message != string.Empty)
+{
+    color += "mb-1 rounded-lg p-2 text-white bg-orange-500";
+    <div class=@color>
+        @Message
+    </div>
+}
+else if (Status == EnumStatusValue.Error && Message != string.Empty)
+{
+    color += "mb-1 rounded-lg p-2 text-white bg-red-500";
+    <div class=@color>
+        @Message
+    </div>
+}
+
+@code {
+    [Parameter]
+    public EnumStatusValue Status { get; set; }
+    [Parameter]
+    public string Message { get; set; } = string.Empty;
+
+    public string color { get; set; }
+}

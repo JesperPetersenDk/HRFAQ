@@ -6,12 +6,8 @@
 <div class="mx-auto max-w-3xl text-center">
     <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">@TextHelperResFile.TopTitleTextMatch.ReplaceText(null)</h2>
     <p class="leading-8 mt-2 text-lg text-gray-600">@TextHelperResFile.TopDeckTextMatch.ReplaceText(null)</p>
-    @if (showAlert)
-    {
-        <div class="mb-1 rounded-lg bg-red-500 p-2 text-white">
-            @message
-        </div>
-    }
+    <AlertInformation Message="@message"
+                      Status="@status" />
 </div>
 <EditForm Model="@matchitemModel" FormName="matchModel" OnSubmit="HandleSubmitMatch" class="mx-auto mt-4 max-w-3xl">
     <div class="grid-cols-1 grid gap-x-8 gap-y-6 sm:grid-cols-4">
@@ -72,7 +68,7 @@
         };
 
     public bool searchData { get; set; } = false;
-    public bool showAlert { get; set; } = false;
+    public EnumStatusValue status { get; set; }
     public string message { get; set; } = string.Empty;
 
 
@@ -109,6 +105,7 @@
     private async Task HandleSubmitMatch()
     {
         var resultData = await _faq.MatchWord(matchitemModel);
+        status = resultData.Status;
         if (resultData.Status == EnumStatusValue.Info)
         {
             var dataResult = resultData.GetData.Cast<MatchViewModel>().FirstOrDefault();

@@ -6,12 +6,8 @@
 <div class="mx-auto max-w-3xl text-center">
     <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">@TextHelperResFile.TopTitleAnswer.ReplaceText(null)</h2>
     <p class="leading-8 mt-2 text-lg text-gray-600">@TextHelperResFile.TopDeckAnswer.ReplaceText(null)</p>
-    @if (showAlert)
-    {
-        <div class="mb-1 rounded-lg bg-red-500 p-2 text-white">
-            @message
-        </div>
-    }
+    <AlertInformation Message="@message"
+                      Status="@status" />
 </div>
 <EditForm Model="@answerModel" FormName="searchHome" OnSubmit="HandleSubmitMatch" class="mx-auto mt-4 max-w-3xl">
     <div class="grid-cols-1 grid gap-x-8 gap-y-6 sm:grid-cols-4">
@@ -72,7 +68,7 @@
         };
 
     public bool searchData { get; set; } = false;
-    public bool showAlert { get; set; } = false;
+    public EnumStatusValue status { get; set; }
     public string message { get; set; } = string.Empty;
 
     protected override async Task OnInitializedAsync()
@@ -83,6 +79,7 @@
     private async Task HandleSubmitMatch()
     {
         var createFaq = await _faq.AddAnswer(answerModel);
+        status = createFaq.Status;
         if(createFaq.Status == EnumStatusValue.Success)
         {
             
