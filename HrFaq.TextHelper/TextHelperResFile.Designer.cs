@@ -88,6 +88,24 @@ namespace BlazorHrFaq.TextHelper {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Spørgsmålet som bruger stiller. Du kan lave flere ved at bruge &quot; , &quot;.
+        /// </summary>
+        public static string InputAnswer {
+            get {
+                return ResourceManager.GetString("InputAnswer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Du kan tilføj din match ord her hvis du gør brug af det flere steder..
+        /// </summary>
+        public static string InputAnswerTwo {
+            get {
+                return ResourceManager.GetString("InputAnswerTwo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Dit spørgsmål findes ikke i systemet hos {sitename} - Prøv igen: {searchword}.
         /// </summary>
         public static string NotAnswersToUser {
@@ -142,6 +160,15 @@ namespace BlazorHrFaq.TextHelper {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Lave alle dine spørgsmål klar til jeres medarbejder og være klar med de bedste besvarelse..
+        /// </summary>
+        public static string TopDeckAnswer {
+            get {
+                return ResourceManager.GetString("TopDeckAnswer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Ønsker at du at opnå besvarelse på dine spørgsmål - {titlename} besvare dine spørgsmål!.
         /// </summary>
         public static string TopDeckText {
@@ -156,6 +183,15 @@ namespace BlazorHrFaq.TextHelper {
         public static string TopDeckTextMatch {
             get {
                 return ResourceManager.GetString("TopDeckTextMatch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Oprettelse af spørgsmål til {sitename}.
+        /// </summary>
+        public static string TopTitleAnswer {
+            get {
+                return ResourceManager.GetString("TopTitleAnswer", resourceCulture);
             }
         }
         

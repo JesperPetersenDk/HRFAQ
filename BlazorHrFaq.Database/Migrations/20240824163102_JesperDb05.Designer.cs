@@ -4,6 +4,7 @@ using BlazorHrFaq.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BlazorHrFaq.Database.Migrations
 {
     [DbContext(typeof(DatabaseDb))]
-    partial class DatabaseDbModelSnapshot : ModelSnapshot
+    [Migration("20240824163102_JesperDb05")]
+    partial class JesperDb05
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -32,11 +35,11 @@ namespace BlazorHrFaq.Database.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("CreateDatetime")
-                        .HasColumnType("datetime2");
-
                     b.Property<int?>("HitCount")
                         .HasColumnType("int");
+
+                    b.Property<DateTime?>("LastUpdate")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("SearchWords")
                         .IsRequired()
@@ -49,26 +52,26 @@ namespace BlazorHrFaq.Database.Migrations
                     b.HasData(
                         new
                         {
-                            FaqId = new Guid("ab149676-7460-4acb-8709-d0c5da325a1d"),
+                            FaqId = new Guid("16684a83-f85f-42c0-be95-26587dc387bb"),
                             Answer = "Hello world",
-                            CreateDatetime = new DateTime(2024, 8, 24, 18, 37, 48, 754, DateTimeKind.Local).AddTicks(3835),
                             HitCount = 1,
+                            LastUpdate = new DateTime(2024, 8, 24, 18, 31, 2, 0, DateTimeKind.Local).AddTicks(6443),
                             SearchWords = "Hej"
                         },
                         new
                         {
-                            FaqId = new Guid("27554c9c-9908-4502-bd86-eab867007cca"),
+                            FaqId = new Guid("9c58e705-0288-4a0d-961c-d71b6ff35886"),
                             Answer = "Hello world",
-                            CreateDatetime = new DateTime(2024, 8, 24, 18, 37, 48, 754, DateTimeKind.Local).AddTicks(3892),
                             HitCount = 1,
+                            LastUpdate = new DateTime(2024, 8, 24, 18, 31, 2, 0, DateTimeKind.Local).AddTicks(6507),
                             SearchWords = "Jesper"
                         },
                         new
                         {
-                            FaqId = new Guid("aad30447-2a5c-42b5-9ffb-911ce6992110"),
+                            FaqId = new Guid("c586c144-7d0f-4efa-a899-7e111f216079"),
                             Answer = "Hello world",
-                            CreateDatetime = new DateTime(2024, 8, 24, 18, 37, 48, 754, DateTimeKind.Local).AddTicks(3895),
                             HitCount = 1,
+                            LastUpdate = new DateTime(2024, 8, 24, 18, 31, 2, 0, DateTimeKind.Local).AddTicks(6510),
                             SearchWords = "Test"
                         });
                 });

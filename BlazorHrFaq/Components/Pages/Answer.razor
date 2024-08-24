@@ -1,0 +1,95 @@
+﻿@page "/answer"
+
+@inject ILoggningService _log
+@inject IFaqService _faq
+
+<div class="mx-auto max-w-3xl text-center">
+    <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">@TextHelperResFile.TopTitleAnswer.ReplaceText(null)</h2>
+    <p class="leading-8 mt-2 text-lg text-gray-600">@TextHelperResFile.TopDeckAnswer.ReplaceText(null)</p>
+    @if (showAlert)
+    {
+        <div class="mb-1 rounded-lg bg-red-500 p-2 text-white">
+            @message
+        </div>
+    }
+</div>
+<EditForm Model="@answerModel" FormName="searchHome" OnSubmit="HandleSubmitMatch" class="mx-auto mt-4 max-w-3xl">
+    <div class="grid-cols-1 grid gap-x-8 gap-y-6 sm:grid-cols-4">
+        <div class="sm:col-span-4">
+            <div class="mt-2.5">
+                <InputText class="w-full rounded-lg border border-gray-200 bg-gray-200 px-4 py-3 text-sm focus:bg-gray-100 focus:outline-none focus:border-purple-400"
+                           @bind-Value="answerModel.SearchWords"
+                           type="text"
+                           placeholder="@TextHelperResFile.InputAnswer" />
+            </div>
+        </div>
+        <div class="sm:col-span-4">
+            <div class="mt-2.5">
+                <InputTextArea class="w-full rounded-lg border border-gray-200 bg-gray-200 px-4 py-3 text-sm focus:bg-gray-100 focus:outline-none focus:border-purple-400"
+                           @bind-Value="answerModel.Answer"
+                           type="text"
+                               placeholder="@TextHelperResFile.InputAnswerTwo" />
+            </div>
+        </div>
+    </div>
+    <div class="mt-4">
+        <button type="submit" class="block w-full rounded-md bg-green-600 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+            @TextHelperResFile.AddInformation
+        </button>
+    </div>
+    @* @if (modelList.Count() > 0)
+    {
+        <div class="mt-3">
+            <table class="table-auto">
+                <thead>
+                    <tr>
+                        <th>Kode</th>
+                        <th>Link</th>
+                        <th>Tekst</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in modelList)
+                    {
+                        <tr>
+                            <td class="px-4 py-2">@item.CodeValue</td>
+                            <td class="px-4 py-2">@item.Value</td>
+                            <td class="px-4 py-2">@item.Text</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    } *@
+</EditForm>
+
+@code {
+    [SupplyParameterFromForm]
+    AnswerModel answerModel { get; set; } = new AnswerModel
+        {
+            Answer = string.Empty,
+            SearchWords = string.Empty
+        };
+
+    public bool searchData { get; set; } = false;
+    public bool showAlert { get; set; } = false;
+    public string message { get; set; } = string.Empty;
+
+    protected override async Task OnInitializedAsync()
+    {
+        _log.Log("User show the page. - Answer page", EnumStatusValue.Info);
+    }
+
+    private async Task HandleSubmitMatch()
+    {
+        var createFaq = await _faq.AddAnswer(answerModel);
+        if(createFaq.Status == EnumStatusValue.Success)
+        {
+            
+        }
+        else
+        {
+            
+        }
+    }
+}

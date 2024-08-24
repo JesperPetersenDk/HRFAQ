@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace FaqModel
 {
-    public class MatchModel
+    public class AnswerModel
     {
-        public string Text { get; set; }
-        public string Value { get; set; }
+        public string SearchWords { get; set; }
+        public string Answer { get; set; }
     }
 }

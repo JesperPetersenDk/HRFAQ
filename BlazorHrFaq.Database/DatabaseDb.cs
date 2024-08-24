@@ -40,24 +40,18 @@ namespace BlazorHrFaq.Database
                         HitCount = 1,
                         Answer = "Hello world",
                         SearchWords = "Hej",
-                        LastUpdate = DateTime.Now,
-                        Priority = PriorityEnum.Lowest,
                     },
                     new Faq
                     {
                         HitCount = 1,
                         Answer = "Hello world",
                         SearchWords = "Jesper",
-                        LastUpdate = DateTime.Now,
-                        Priority = PriorityEnum.Lowest,
                     },
                     new Faq
                     {
                         HitCount = 1,
                         Answer = "Hello world",
                         SearchWords = "Test",
-                        LastUpdate = DateTime.Now,
-                        Priority = PriorityEnum.Lowest,
                     }
                 );
         }

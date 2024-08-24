@@ -126,6 +126,12 @@
   <data name="AddValue" xml:space="preserve">
     <value>Tilføj url til billede, link eller PDF.</value>
   </data>
+  <data name="InputAnswer" xml:space="preserve">
+    <value>Spørgsmålet som bruger stiller. Du kan lave flere ved at bruge " , "</value>
+  </data>
+  <data name="InputAnswerTwo" xml:space="preserve">
+    <value>Du kan tilføj din match ord her hvis du gør brug af det flere steder.</value>
+  </data>
   <data name="NotAnswersToUser" xml:space="preserve">
     <value>Dit spørgsmål findes ikke i systemet hos {sitename} - Prøv igen: {searchword}</value>
   </data>
@@ -145,11 +151,17 @@
     <value>Hr FAQ</value>
     <comment>Sidens title navn</comment>
   </data>
+  <data name="TopDeckAnswer" xml:space="preserve">
+    <value>Lave alle dine spørgsmål klar til jeres medarbejder og være klar med de bedste besvarelse.</value>
+  </data>
   <data name="TopDeckText" xml:space="preserve">
     <value>Ønsker at du at opnå besvarelse på dine spørgsmål - {titlename} besvare dine spørgsmål!</value>
   </data>
   <data name="TopDeckTextMatch" xml:space="preserve">
     <value>Her vil du kun tildele links, billeder og pdf filer til.</value>
+  </data>
+  <data name="TopTitleAnswer" xml:space="preserve">
+    <value>Oprettelse af spørgsmål til {sitename}</value>
   </data>
   <data name="TopTitleText" xml:space="preserve">
     <value>{titlename} - Still din spørgsmål.</value>
