@@ -16,7 +16,7 @@ namespace BlazorHrFaq.Database.Model
         public Guid FaqId { get; set; } = Guid.NewGuid();
         public string SearchWords { get; set; }
         public string Answer { get; set; }
-        public DateTime? LastUpdate { get; set; }
+        public DateTime CreateDatetime { get; set; } = DateTime.Now;
         public int? HitCount { get; set; } = 0;
     }
 }

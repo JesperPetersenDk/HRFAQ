@@ -9,6 +9,7 @@ namespace HRFaq.Faq.Service
 {
     public interface IFaqService
     {
+        Task<ResponseModel> AddAnswer(AnswerModel model);
         Task<ResponseModel> GetAnswersList(string answers);
         Task<ResponseModel> MatchWord(MatchModel model);
         Task<ResponseModel> GetMatchWord();
@@ -123,6 +124,40 @@ namespace HRFaq.Faq.Service
                     Status = EnumStatusValue.Success,
                     GetData = new[] { dataModel }
                 };
+            }
+            catch (Exception ex)
+            {
+                result.Data = new ResponseModel()
+                {
+                    Message = $"{ex.Message} - {ex}",
+                    Status = EnumStatusValue.Error,
+                };
+            }
+            return result.Data;
+        }
+
+        public async Task<ResponseModel> AddAnswer(AnswerModel model)
+        {
+            var result = new ResponseDataModel();
+            try
+            {
+                var createFaq = await _com.CreateFaq(model.SearchWords, model.Answer);
+                if (createFaq)
+                {
+                    result.Data = new ResponseModel()
+                    {
+                        Message = $"Success to save in Database for user.",
+                        Status = EnumStatusValue.Success,
+                    };
+                }
+                else
+                {
+                    result.Data = new ResponseModel()
+                    {
+                        Message = $"Cant not save in Database to Faq. - Try again.",
+                        Status = EnumStatusValue.Failed,
+                    };
+                }
             }
             catch (Exception ex)
             {

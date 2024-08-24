@@ -13,7 +13,7 @@
         </div>
     }
 </div>
-<EditForm Model="@matchitemModel" FormName="searchHome" OnSubmit="HandleSubmitMatch" class="mx-auto mt-4 max-w-3xl">
+<EditForm Model="@matchitemModel" FormName="matchModel" OnSubmit="HandleSubmitMatch" class="mx-auto mt-4 max-w-3xl">
     <div class="grid-cols-1 grid gap-x-8 gap-y-6 sm:grid-cols-4">
         <div class="sm:col-span-2">
             <div class="mt-2.5">
@@ -81,6 +81,7 @@
 
     protected override async Task OnInitializedAsync()
     {
+        _log.Log("User show the page. - Match Page", EnumStatusValue.Info);
         await base.OnInitializedAsync();
         var resultData = await _faq.GetMatchWord();
         if (resultData.Status == EnumStatusValue.Success)

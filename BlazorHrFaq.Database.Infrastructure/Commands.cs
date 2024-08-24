@@ -8,6 +8,7 @@ namespace BlazorHrFaq.Database.Infrastructure
     public interface ICommands
     {
         Task<List<Faq>> GetFaq(string text);
+        Task<bool> CreateFaq(string searchwords, string answer);
         Task<Tuple<int, string>> AddMatchData(string text, string value);
         Task<List<MatchData>> GetMatchData();
     }
@@ -30,6 +31,27 @@ namespace BlazorHrFaq.Database.Infrastructure
                 saveInDatabase = await db.SaveChangesAsync();
 
                 return Tuple.Create(saveInDatabase, codeValue);
+            }
+        }
+
+        public async Task<bool> CreateFaq(string searchwords, string answer)
+        {
+            using (var db = new DatabaseDb())
+            {
+                int saveInDatabase = 0; // False to save in database
+                Faq matchData = new Faq
+                {
+                    Answer = answer,
+                    SearchWords = searchwords
+                };
+
+                await db.Faq.AddAsync(matchData);
+                saveInDatabase = await db.SaveChangesAsync();
+
+                //error or success herre.
+                bool saveInDb = saveInDatabase > 0 ? true : false;
+
+                return saveInDb;
             }
         }
 
