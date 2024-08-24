@@ -70,7 +70,8 @@
     {
         var resultData = await _faq.GetAnswersList(searchModel.Text);
         status = resultData.Status;
-        if(resultData.Status == EnumStatusValue.Success)
+        _log.Log(resultData.Message, status);
+        if(status == EnumStatusValue.Success)
         {
             searchData = true;
             var dataResult = resultData.GetData.Cast<ListItemModel>().FirstOrDefault();
@@ -91,7 +92,7 @@
         else
         {
             searchData = false;
-            message = resultData.Message;
+            message = resultData.MessegeTouser;
             searchModel.Text = string.Empty;
         }
     }

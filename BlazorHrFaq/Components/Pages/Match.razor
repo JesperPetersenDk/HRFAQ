@@ -108,7 +108,8 @@
     {
         var resultData = await _faq.MatchWord(matchitemModel);
         status = resultData.Status;
-        if (resultData.Status == EnumStatusValue.Info)
+        _log.Log(resultData.Message, status);
+        if (status == EnumStatusValue.Info)
         {
             var dataResult = resultData.GetData.Cast<MatchViewModel>().FirstOrDefault();
             if (dataResult != null)
@@ -117,6 +118,10 @@
                 //Reload page
                 nav.NavigateTo("matchword");
             }
+        }
+        else
+        {
+            message = resultData.MessegeTouser;
         }
     }
 }

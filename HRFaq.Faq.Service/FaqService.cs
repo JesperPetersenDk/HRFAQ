@@ -36,6 +36,7 @@ namespace HRFaq.Faq.Service
                 result.Data = new ResponseModel()
                 {
                     Message = (returnBoolData > 0) ? "Succes to save in database" : "Error to add in MatchData - Database",
+                    MessegeTouser = (returnBoolData > 0) ? "Indholdet er gemt." : "Der er sket en fejl i tilføjelse til databasen",
                     Status = EnumStatusValue.Info,
                     GetData = new[] { dataModel }
                 };
@@ -44,6 +45,7 @@ namespace HRFaq.Faq.Service
             {
                 result.Data = new ResponseModel()
                 {
+                    MessegeTouser = "Indhold der er angivet bliver ikke godkendt",
                     Message = $"{ex.Message} - {ex}",
                     Status = EnumStatusValue.Error,
                 };
@@ -76,6 +78,7 @@ namespace HRFaq.Faq.Service
 
                     result.Data = new ResponseModel()
                     {
+                        MessegeTouser = "Fremvisning af indhold: " + answers,
                         Message = "Show data to user",
                         Status = EnumStatusValue.Success,
                         GetData = new[] { listItemModel }
@@ -83,9 +86,11 @@ namespace HRFaq.Faq.Service
                 }
                 else
                 {
+
                     result.Data = new ResponseModel()
                     {
-                        Message = TextHelperResFile.NotAnswersToUser.ToString().ReplaceText(answers),
+                        MessegeTouser = TextHelperResFile.NotAnswersToUser.ToString().ReplaceText(answers),
+                        Message = "Failed with search data - Try again",
                         Status = EnumStatusValue.Failed,
                     };
                 }
@@ -146,6 +151,7 @@ namespace HRFaq.Faq.Service
                 {
                     result.Data = new ResponseModel()
                     {
+                        MessegeTouser = "Tilføj indholdet.",
                         Message = $"Success to save in Database for user.",
                         Status = EnumStatusValue.Success,
                     };
@@ -154,6 +160,7 @@ namespace HRFaq.Faq.Service
                 {
                     result.Data = new ResponseModel()
                     {
+                        MessegeTouser = "Der er sket en fejl ved oprettelsen.",
                         Message = $"Cant not save in Database to Faq. - Try again.",
                         Status = EnumStatusValue.Failed,
                     };

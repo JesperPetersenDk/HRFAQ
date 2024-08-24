@@ -80,18 +80,14 @@
 
     private async Task HandleSubmitMatch()
     {
-        var createFaq = await _faq.AddAnswer(answerModel);
-        status = createFaq.Status;
-        if(createFaq.Status == EnumStatusValue.Success)
-        {
-
-
-            //Reload page
-            nav.NavigateTo("answer");
-        }
-        else
+        var resultData = await _faq.AddAnswer(answerModel);
+        status = resultData.Status;
+        _log.Log(resultData.Message, status);
+        if(status == EnumStatusValue.Success)
         {
             
+            //Reload page
+            nav.NavigateTo("answer");
         }
     }
 }
