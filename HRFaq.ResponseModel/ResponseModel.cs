@@ -6,6 +6,7 @@ namespace Helpers.ResponseModel
     {
         public DateTime ResponseDateTime { get; set; } = DateTime.Now;
         public string Message { get; set; }
+        public string MessegeTouser { get; set; } = string.Empty;
         public EnumStatusValue Status { get; set; } = EnumStatusValue.Unknown;
         public IEnumerable GetData { get; set; }
     }
@@ -14,6 +15,7 @@ namespace Helpers.ResponseModel
     {
         public DateTime ResponseDateTime { get; set; } = DateTime.Now;
         public string Message { get; set; }
+        public string MessegeTouser { get; set; } = string.Empty;
         public EnumStatusValue Status { get; set; } = EnumStatusValue.Unknown;
         public IEnumerable<T> GetData { get; set; }
     }
