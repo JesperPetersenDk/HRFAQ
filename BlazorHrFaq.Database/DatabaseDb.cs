@@ -41,7 +41,6 @@ namespace BlazorHrFaq.Database
                         Answer = "Hello world",
                         SearchWords = "Hej",
                         LastUpdate = DateTime.Now,
-                        Priority = PriorityEnum.Lowest,
                     },
                     new Faq
                     {
@@ -49,7 +48,6 @@ namespace BlazorHrFaq.Database
                         Answer = "Hello world",
                         SearchWords = "Jesper",
                         LastUpdate = DateTime.Now,
-                        Priority = PriorityEnum.Lowest,
                     },
                     new Faq
                     {
@@ -57,7 +55,6 @@ namespace BlazorHrFaq.Database
                         Answer = "Hello world",
                         SearchWords = "Test",
                         LastUpdate = DateTime.Now,
-                        Priority = PriorityEnum.Lowest,
                     }
                 );
         }
