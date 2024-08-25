@@ -17,5 +17,6 @@ namespace FaqModel
         public string Value { get; set; } //Url to site, image url or other.
         public string Text { get; set; } //Text to link, value to image or other.
         public string CodeValue { get; set; } // Random code value to user
+        public bool MatchWord { get; set; } = false;
     }
 }

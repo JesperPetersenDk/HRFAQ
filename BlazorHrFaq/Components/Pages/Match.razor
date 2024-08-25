@@ -43,6 +43,7 @@
                         <th>Kode</th>
                         <th>Link</th>
                         <th>Tekst</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -52,6 +53,7 @@
                             <td class="px-4 py-2">@item.CodeValue</td>
                             <td class="px-4 py-2">@item.Value</td>
                             <td class="px-4 py-2">@item.Text</td>
+                            <td class="px-4 py-2">@((item.MatchWord) ? "I brug" : "")</td>
                         </tr>
                     }
                 </tbody>
@@ -95,7 +97,8 @@
                             {
                                 Text = item.Text,
                                 CodeValue = item.CodeValue,
-                                Value = item.Value
+                                Value = item.Value,
+                                MatchWord = item.MatchWord
                             });
                     }
                 }
