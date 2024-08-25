@@ -129,7 +129,7 @@ namespace HRFaq.Faq.Service
                 foreach (var matchData in matchDataList)
                 {
                     // Hvis nøgleordet allerede er fundet, springes det over
-                    if (foundKeywords.Contains(matchData.CodeValue))
+                    if (foundKeywords.Contains(matchData.Item1))
                     {
                         continue;
                     }
@@ -139,9 +139,9 @@ namespace HRFaq.Faq.Service
                     foreach (var faq in faqList)
                     {
                         // Tjek om FAQ-svar indeholder match-koden
-                        if (faq.Answer.Contains(matchData.CodeValue))
+                        if (faq.Item1.Contains(matchData.Item1))
                         {
-                            foundKeywords.Add(matchData.CodeValue);
+                            foundKeywords.Add(matchData.Item1);
                             isMatchFound = true;
                             break;  // Stop gennemgangen af FAQ-listen, når et match er fundet
                         }
@@ -150,9 +150,9 @@ namespace HRFaq.Faq.Service
                     // Tilføj data til modellen
                     dataModel.data.Add(new MatchListViewModel
                     {
-                        CodeValue = matchData.CodeValue,
-                        Text = matchData.Text,
-                        Value = matchData.Value,
+                        CodeValue = matchData.Item1,
+                        Text = matchData.Item2,
+                        Value = matchData.Item3,
                         MatchWord = isMatchFound
                     });
                 }
