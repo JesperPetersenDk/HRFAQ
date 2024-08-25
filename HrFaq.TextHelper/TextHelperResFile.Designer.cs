@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlazorHrFaq.TextHelper {
+namespace HrFaq.TextHelper {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace BlazorHrFaq.TextHelper {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("BlazorHrFaq.TextHelper.TextHelperResFile", typeof(TextHelperResFile).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("HrFaq.TextHelper.TextHelperResFile", typeof(TextHelperResFile).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\HRFaq.ResponseModel\BlazorHrFaq.ResponseModel.csproj" />
+    <ProjectReference Include="..\HRFaq.ResponseModel\HrFaq.ResponseModel.csproj" />
   </ItemGroup>
 
 </Project>

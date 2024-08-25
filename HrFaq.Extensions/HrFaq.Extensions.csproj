@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BlazorHrFaq.Database\BlazorHrFaq.Database.csproj" />
+    <ProjectReference Include="..\HrFaq.TextHelper\HrFaq.TextHelper.csproj" />
   </ItemGroup>
 
 </Project>
