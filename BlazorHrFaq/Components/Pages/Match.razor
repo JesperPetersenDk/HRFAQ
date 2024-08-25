@@ -30,8 +30,7 @@
         </div>
     </div>
     <div class="mt-4">
-        <button type="submit" class="block w-full rounded-md bg-green-600 px-3.5 py-2.5 text-center text-sm 
-                font-semibold text-white shadow-sm hover:bg-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600">
+        <button type="submit" class="block w-full rounded-md bg-green-600 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600">
             @TextHelperResFile.AddInformation
         </button>
     </div>
@@ -44,6 +43,7 @@
                         <th>Kode</th>
                         <th>Link</th>
                         <th>Tekst</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -53,6 +53,7 @@
                             <td class="px-4 py-2">@item.CodeValue</td>
                             <td class="px-4 py-2">@item.Value</td>
                             <td class="px-4 py-2">@item.Text</td>
+                            <td class="px-4 py-2">@((item.MatchWord) ? "I brug" : "")</td>
                         </tr>
                     }
                 </tbody>
@@ -96,7 +97,8 @@
                             {
                                 Text = item.Text,
                                 CodeValue = item.CodeValue,
-                                Value = item.Value
+                                Value = item.Value,
+                                MatchWord = item.MatchWord
                             });
                     }
                 }

@@ -4,6 +4,7 @@ using BlazorHrFaq.TextHelper;
 using Helpers.ResponseModel;
 using System.Text.RegularExpressions;
 using System.Windows.Input;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace HRFaq.Faq.Service
 {
@@ -111,18 +112,51 @@ namespace HRFaq.Faq.Service
             var result = new ResponseDataModel();
             try
             {
-                MatchViewModel dataModel = new MatchViewModel();
-                dataModel.data = new List<MatchListViewModel>();
-                var listData = await _com.GetMatchData();
-                foreach (var item in listData)
+                // Opret HashSet til at holde styr på fundne nøgleord
+                HashSet<string> foundKeywords = new HashSet<string>();
+
+                // Initialiser data modellen
+                MatchViewModel dataModel = new MatchViewModel
                 {
+                    data = new List<MatchListViewModel>()
+                };
+
+                // Hent data fra eksterne kilder
+                var matchDataList = await _com.GetMatchData();
+                var faqList = await _com.GetFaq();
+
+                // Gennemgå match data listen
+                foreach (var matchData in matchDataList)
+                {
+                    // Hvis nøgleordet allerede er fundet, springes det over
+                    if (foundKeywords.Contains(matchData.CodeValue))
+                    {
+                        continue;
+                    }
+
+                    // Gennemgå FAQ-listen
+                    bool isMatchFound = false;
+                    foreach (var faq in faqList)
+                    {
+                        // Tjek om FAQ-svar indeholder match-koden
+                        if (faq.Answer.Contains(matchData.CodeValue))
+                        {
+                            foundKeywords.Add(matchData.CodeValue);
+                            isMatchFound = true;
+                            break;  // Stop gennemgangen af FAQ-listen, når et match er fundet
+                        }
+                    }
+
+                    // Tilføj data til modellen
                     dataModel.data.Add(new MatchListViewModel
                     {
-                        CodeValue = item.CodeValue,
-                        Text = item.Text,
-                        Value = item.Value
+                        CodeValue = matchData.CodeValue,
+                        Text = matchData.Text,
+                        Value = matchData.Value,
+                        MatchWord = isMatchFound
                     });
                 }
+
                 result.Data = new ResponseModel()
                 {
                     Message = "Show list to user",
@@ -176,5 +210,7 @@ namespace HRFaq.Faq.Service
             }
             return result.Data;
         }
+
+        
     }
 }

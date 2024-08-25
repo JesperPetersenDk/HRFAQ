@@ -8,6 +8,7 @@ namespace BlazorHrFaq.Database.Infrastructure
     public interface ICommands
     {
         Task<List<Faq>> GetFaq(string text);
+        Task<List<Faq>> GetFaq();
         Task<bool> CreateFaq(string searchwords, string answer);
         Task<Tuple<int, string>> AddMatchData(string text, string value);
         Task<List<MatchData>> GetMatchData();
@@ -75,6 +76,14 @@ namespace BlazorHrFaq.Database.Infrastructure
             }
         }
 
+        public async Task<List<Faq>> GetFaq()
+        {
+            using (var db = new DatabaseDb())
+            {
+                return await db.Faq.ToListAsync();
+            }
+        }
+
         public async Task<List<MatchData>> GetMatchData()
         {
             using (var db = new DatabaseDb())
@@ -82,5 +91,6 @@ namespace BlazorHrFaq.Database.Infrastructure
                 return await db.Match.OrderByDescending(r => r.MatchId).ToListAsync();
             }
         }
+
     }
 }
