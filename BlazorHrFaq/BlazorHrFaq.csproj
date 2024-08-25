@@ -14,10 +14,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\HRFaq.Faq.Service\BlazorHrFaq.Faq.Service.csproj" />
-    <ProjectReference Include="..\HRFaq.Loggning.Service\BlazorHrFaq.Loggning.Service.csproj" />
-    <ProjectReference Include="..\HrFaq.TextHelper\BlazorHrFaq.TextHelper.csproj" />
-    <ProjectReference Include="..\ViewModel\BlazorHrFaq.Faq.Model.csproj" />
+    <ProjectReference Include="..\HrFaq.Database.Infrastructure\HrFaq.Database.Infrastructure.csproj" />
+    <ProjectReference Include="..\HrFaq.Faq.Model\HrFaq.Faq.Model.csproj" />
+    <ProjectReference Include="..\HRFaq.Faq.Service\HrFaq.Faq.Service.csproj" />
+    <ProjectReference Include="..\HRFaq.Loggning.Service\HrFaq.Loggning.Service.csproj" />
+    <ProjectReference Include="..\HrFaq.TextHelper\HrFaq.TextHelper.csproj" />
+    <ProjectReference Include="..\ViewModel\HrFaq.Faq.Model.csproj" />
   </ItemGroup>
 
 </Project>

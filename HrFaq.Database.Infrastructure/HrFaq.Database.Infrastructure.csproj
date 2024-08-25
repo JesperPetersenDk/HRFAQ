@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BlazorHrFaq.Database\HrFaq.Database.csproj" />
+    <ProjectReference Include="..\Extensions\Extensions.csproj" />
+    <ProjectReference Include="..\HrFaq.Database.Database\HrFaq.Database.csproj" />
+    <ProjectReference Include="..\HrFaq.Extensions\HrFaq.Extensions.csproj" />
+  </ItemGroup>
+
+</Project>

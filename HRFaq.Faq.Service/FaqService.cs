@@ -1,6 +1,6 @@
 ﻿using BlazorHrFaq.Database.Infrastructure;
 using FaqModel;
-using BlazorHrFaq.TextHelper;
+using HrFaq.TextHelper;
 using Helpers.ResponseModel;
 using System.Text.RegularExpressions;
 using System.Windows.Input;
@@ -60,7 +60,7 @@ namespace HRFaq.Faq.Service
             try
             {
                 var resultData = await _com.GetFaq(answers);
-                if(resultData != null && resultData.Count > 0)
+                if(resultData != null && resultData.Count() > 0)
                 {
                     //Add Item to model
                     ListItemModel listItemModel = new ListItemModel();
@@ -71,8 +71,8 @@ namespace HRFaq.Faq.Service
                     {
                         listItemModel.data.Add(new ListWithSearchDataModel
                         {
-                            Answer = item.Answer,
-                            HitCount = item.HitCount,
+                            Answer = item.Item1,
+                            HitCount = item.Item2,
                         });
                     }
 
