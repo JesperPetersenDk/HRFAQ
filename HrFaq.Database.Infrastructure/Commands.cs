@@ -7,10 +7,10 @@ namespace BlazorHrFaq.Database.Infrastructure
 {
     public interface ICommands
     {
-        Task<List<Faq>> GetFaq(string text);
+        Task<List<Tuple<string, int>>> GetFaq(string text);
         Task<bool> CreateFaq(string searchwords, string answer);
         Task<Tuple<int, string>> AddMatchData(string text, string value);
-        Task<List<MatchData>> GetMatchData();
+        Task<List<Tuple<string, string, string>>> GetMatchData();
     }
     public class Commands : ICommands
     {
@@ -55,10 +55,11 @@ namespace BlazorHrFaq.Database.Infrastructure
             }
         }
 
-        public async Task<List<Faq>> GetFaq(string text)
+        public async Task<List<Tuple<string, int>>> GetFaq(string text)
         {
             using(var db = new DatabaseDb())
             {
+                var list = new List<Tuple<string, int>>();
                 var resultData = await db.Faq
                             .Where(r => r.SearchWords.Contains(text))
                             .ToListAsync(); // Sorter efter Priority fra højeste til laveste
@@ -68,18 +69,27 @@ namespace BlazorHrFaq.Database.Infrastructure
                     {
                         result.HitCount++;
                         await db.SaveChangesAsync();
+                        list.Add(new Tuple<string, int>(result.Answer, result.HitCount ?? 0));
                     }
-                    return resultData;
                 }
-                return null;                
+                return list;                
             }
         }
 
-        public async Task<List<MatchData>> GetMatchData()
+        public async Task<List<Tuple<string, string,string>>> GetMatchData()
         {
             using (var db = new DatabaseDb())
             {
-                return await db.Match.OrderByDescending(r => r.MatchId).ToListAsync();
+                var listData = new List<Tuple<string, string, string>>();
+                var list = await db.Match.OrderByDescending(r => r.MatchId).ToListAsync();
+                if(list.Count() > 0)
+                {
+                    foreach(var item in list)
+                    {
+                        listData.Add(new Tuple<string, string, string>(item.CodeValue, item.Text, item.Value));
+                    }
+                }
+                return listData;
             }
         }
     }

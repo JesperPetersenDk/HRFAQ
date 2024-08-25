@@ -1,4 +1,4 @@
-﻿using BlazorHrFaq.TextHelper;
+﻿using HrFaq.TextHelper;
 
 namespace System
 {
