@@ -43,6 +43,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HrFaq.Database.Infrastructu
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HrFaq.Extensions", "HrFaq.Extensions\HrFaq.Extensions.csproj", "{E6F270D4-67E4-4680-BEAD-F4624A94F3CB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HrFaq.Helper.Xunit", "HrFaq.Helper.Xunit\HrFaq.Helper.Xunit.csproj", "{76EFD3A1-9465-4FEB-9E5F-BAB9D5DC82B3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -97,6 +99,10 @@ Global
 		{E6F270D4-67E4-4680-BEAD-F4624A94F3CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E6F270D4-67E4-4680-BEAD-F4624A94F3CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E6F270D4-67E4-4680-BEAD-F4624A94F3CB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{76EFD3A1-9465-4FEB-9E5F-BAB9D5DC82B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{76EFD3A1-9465-4FEB-9E5F-BAB9D5DC82B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{76EFD3A1-9465-4FEB-9E5F-BAB9D5DC82B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{76EFD3A1-9465-4FEB-9E5F-BAB9D5DC82B3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -116,6 +122,7 @@ Global
 		{16589814-9C01-4DF9-8148-EC622D635CBD} = {5EBCAB1A-D4B8-405B-A7DD-DDCFA72C3101}
 		{8A4FBE61-E2E1-453D-A417-198D5139970A} = {5EBCAB1A-D4B8-405B-A7DD-DDCFA72C3101}
 		{E6F270D4-67E4-4680-BEAD-F4624A94F3CB} = {B8E15616-A624-4BC5-9CB3-030E4044E839}
+		{76EFD3A1-9465-4FEB-9E5F-BAB9D5DC82B3} = {B8E15616-A624-4BC5-9CB3-030E4044E839}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {BBE3DAF7-D25A-4F44-A446-7776BC985D4D}
