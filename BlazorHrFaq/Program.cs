@@ -1,5 +1,6 @@
 using BlazorHrFaq.Components;
 using BlazorHrFaq.Database.Infrastructure;
+using HrFaq.Settings.Service;
 using HRFaq.Faq.Service;
 using HRFaq.Loggning.Service;
 
@@ -13,6 +14,7 @@ builder.Services.AddRazorComponents()
 builder.Services.AddSingleton<ILoggningService, LoggningService>();
 builder.Services.AddSingleton<IFaqService, FaqService>();
 builder.Services.AddSingleton<ICommands, Commands>();
+builder.Services.AddSingleton<ISettingsService, SettingsService>();
 
 
 var app = builder.Build();

@@ -1,4 +1,5 @@
 ﻿using BlazorHrFaq.Database.Model;
+using HrFaq.Database.Model;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
@@ -8,6 +9,7 @@ namespace BlazorHrFaq.Database
     {
         public DbSet<Faq> Faq { get; set; }
         public DbSet<MatchData> Match { get; set; }
+        public DbSet<SettingInfo> SettingInfo { get; set; }
         public DatabaseDb(DbContextOptions<DatabaseDb> options) : base(options)
         {
 
@@ -33,6 +35,9 @@ namespace BlazorHrFaq.Database
 
             modelBuilder.Entity<Faq>().HasKey(r => r.FaqId);
 
+
+            modelBuilder.Entity<SettingInfo>().HasKey(r => r.SettingInfoId);
+
             modelBuilder.Entity<Faq>()
                 .HasData(
                     new Faq
@@ -52,6 +57,17 @@ namespace BlazorHrFaq.Database
                         HitCount = 1,
                         Answer = "Hello world",
                         SearchWords = "Test",
+                    }
+                );
+            modelBuilder.Entity<SettingInfo>()
+                .HasData(
+                    new SettingInfo
+                    {
+                        AnswerMuli = true,
+                        RemoveMatchWords = false,
+                        StatusRapport = true,
+                        CompanyCategory = false,
+                        LoginUser = false
                     }
                 );
         }

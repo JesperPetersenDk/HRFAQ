@@ -1,5 +1,6 @@
 ﻿using BlazorHrFaq.Database.Model;
 using Extensions;
+using HrFaq.Settings.Model;
 using Microsoft.EntityFrameworkCore;
 using static System.Net.Mime.MediaTypeNames;
 
@@ -12,6 +13,8 @@ namespace BlazorHrFaq.Database.Infrastructure
         Task<bool> CreateFaq(string searchwords, string answer);
         Task<Tuple<int, string>> AddMatchData(string text, string value);
         Task<List<Tuple<string, string, string>>> GetMatchData();
+        Task<List<SettingModel>> SettingInformation();
+        Task<bool> SaveSettingInfo(SettingModel model);
     }
     public class Commands : ICommands
     {
@@ -111,5 +114,47 @@ namespace BlazorHrFaq.Database.Infrastructure
             }
         }
 
+        public async Task<bool> SaveSettingInfo(SettingModel model)
+        {
+            using (var db = new DatabaseDb())
+            {
+                var resultData = await db.SettingInfo.FirstOrDefaultAsync();
+                if(resultData != null )
+                {
+                    resultData.AnswerMuli = model.AnswerMuli;
+                    resultData.RemoveMatchWords = model.RemoveMatchWords;
+                    resultData.LoginUser = model.LoginUser;
+                    resultData.CompanyCategory = model.CompanyCategory;
+                    resultData.StatusRapport = model.StatusRapport;
+                    int saveInDatabase = await db.SaveChangesAsync();
+                    return (saveInDatabase > 0) ? true : false;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+        }
+
+        public async Task<List<SettingModel>> SettingInformation()
+        {
+            using (var db = new DatabaseDb())
+            {
+                var list = new List<SettingModel>();
+                var resultData = await db.SettingInfo.FirstOrDefaultAsync();
+                if( resultData != null)
+                {
+                    list.Add(new SettingModel
+                    {
+                        AnswerMuli = resultData.AnswerMuli,
+                        CompanyCategory = resultData.CompanyCategory,
+                        LoginUser = resultData.LoginUser,
+                        RemoveMatchWords = resultData.RemoveMatchWords,
+                        StatusRapport = resultData.StatusRapport
+                    });
+                }
+                return list;
+            }
+        }
     }
 }

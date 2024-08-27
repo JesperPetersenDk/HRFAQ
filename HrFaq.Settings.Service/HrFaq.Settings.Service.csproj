@@ -7,10 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BlazorHrFaq.Database\HrFaq.Database.csproj" />
-    <ProjectReference Include="..\Extensions\Extensions.csproj" />
-    <ProjectReference Include="..\HrFaq.Database.Database\HrFaq.Database.csproj" />
-    <ProjectReference Include="..\HrFaq.Extensions\HrFaq.Extensions.csproj" />
+    <ProjectReference Include="..\HrFaq.Database.Infrastructure\HrFaq.Database.Infrastructure.csproj" />
+    <ProjectReference Include="..\HRFaq.ResponseModel\HrFaq.ResponseModel.csproj" />
     <ProjectReference Include="..\HrFaq.Settings.Model\HrFaq.Settings.Model.csproj" />
   </ItemGroup>
 
