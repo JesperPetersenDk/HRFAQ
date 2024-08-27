@@ -141,6 +141,24 @@
   <data name="SearchTextHome" xml:space="preserve">
     <value>Søgning efter:</value>
   </data>
+  <data name="SettingAnswerMuli" xml:space="preserve">
+    <value>Ønsker i/du flere svare tilbage?</value>
+  </data>
+  <data name="SettingCategori" xml:space="preserve">
+    <value>Kategori område til firma - Fx bogholder vil kun få svar tilbage som omhandler dem.</value>
+  </data>
+  <data name="SettingLoginUser" xml:space="preserve">
+    <value>Kræver system log ind?</value>
+  </data>
+  <data name="SettingRapport" xml:space="preserve">
+    <value>Ønsker rapport over spørgsmål (Ingen bruger data)</value>
+  </data>
+  <data name="SettingRemoveMatchWords" xml:space="preserve">
+    <value>Fjerne indholdet fra svarne.</value>
+  </data>
+  <data name="SettingUpdate" xml:space="preserve">
+    <value>Opdater information</value>
+  </data>
   <data name="Sitename" xml:space="preserve">
     <value>Jesper HR Faq</value>
   </data>

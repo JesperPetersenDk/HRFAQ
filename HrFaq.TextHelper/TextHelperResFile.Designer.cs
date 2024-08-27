@@ -133,6 +133,60 @@ namespace HrFaq.TextHelper {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Ønsker i/du flere svare tilbage?.
+        /// </summary>
+        public static string SettingAnswerMuli {
+            get {
+                return ResourceManager.GetString("SettingAnswerMuli", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Kategori område til firma - Fx bogholder vil kun få svar tilbage som omhandler dem..
+        /// </summary>
+        public static string SettingCategori {
+            get {
+                return ResourceManager.GetString("SettingCategori", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Kræver system log ind?.
+        /// </summary>
+        public static string SettingLoginUser {
+            get {
+                return ResourceManager.GetString("SettingLoginUser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ønsker rapport over spørgsmål (Ingen bruger data).
+        /// </summary>
+        public static string SettingRapport {
+            get {
+                return ResourceManager.GetString("SettingRapport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fjerne indholdet fra svarne..
+        /// </summary>
+        public static string SettingRemoveMatchWords {
+            get {
+                return ResourceManager.GetString("SettingRemoveMatchWords", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Opdater information.
+        /// </summary>
+        public static string SettingUpdate {
+            get {
+                return ResourceManager.GetString("SettingUpdate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Jesper HR Faq.
         /// </summary>
         public static string Sitename {
