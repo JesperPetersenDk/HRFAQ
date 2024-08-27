@@ -1,0 +1,15 @@
+﻿@page "/delete-matchword/{codeValue}"
+@inject NavigationManager NavManager
+
+@code {
+    [Parameter]
+    public string codeValue { get; set; }
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+        
+        NavManager.NavigateTo("information-update");
+    }
+}

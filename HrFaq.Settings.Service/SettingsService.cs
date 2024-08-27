@@ -8,6 +8,7 @@ namespace HrFaq.Settings.Service
     {
         Task<ResponseModel> GetSettingInformation();
         Task<ResponseModel> UpdateSettingInformation(SettingModel model);
+        Task<ResponseModel> RemoveMatchWordsFromContent(string codeValue);
     }
 
     public class SettingsService : ISettingsService
@@ -64,6 +65,11 @@ namespace HrFaq.Settings.Service
                 };
             }
             return result.Data;
+        }
+
+        public Task<ResponseModel> RemoveMatchWordsFromContent(string codeValue)
+        {
+            throw new NotImplementedException();
         }
 
         public async Task<ResponseModel> UpdateSettingInformation(SettingModel model)

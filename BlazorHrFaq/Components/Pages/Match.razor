@@ -40,6 +40,7 @@
             <table class="table-auto">
                 <thead>
                     <tr>
+                        <th></th>
                         <th>Kode</th>
                         <th>Link</th>
                         <th>Tekst</th>
@@ -49,9 +50,16 @@
                 <tbody>
                     @foreach (var item in modelList)
                     {
+                        int lengthCount = 35;
+                        string textValue = (item.Value.Length > lengthCount) ? item.Value.Substring(0, lengthCount) + "..." : item.Value;
                         <tr>
+                            <td class="px-4 py-2">
+                                <a href="#" class="bg-red-500 hover:bg-red-600 p-2 rounded-[1rem] text-white">
+                                    Fjern
+                                </a>
+                            </td>
                             <td class="px-4 py-2">@item.CodeValue</td>
-                            <td class="px-4 py-2">@item.Value</td>
+                            <td class="px-4 py-2">@textValue</td>
                             <td class="px-4 py-2">@item.Text</td>
                             <td class="px-4 py-2">@((item.MatchWord) ? "I brug" : "")</td>
                         </tr>
