@@ -58,7 +58,7 @@ namespace HrFaq.Settings.Service
             {
                 result.Data = new ResponseModel()
                 {
-                    MessegeTouser = "Indhold der er angivet bliver ikke godkendt",
+                    MessegeTouser = $"Der kunne ikke blive hentet indhold - Fejl besked {ex.Message}",
                     Message = $"{ex.Message} - {ex}",
                     Status = EnumStatusValue.Error,
                 };
@@ -95,7 +95,7 @@ namespace HrFaq.Settings.Service
             {
                 result.Data = new ResponseModel()
                 {
-                    MessegeTouser = "Indhold der er angivet bliver ikke godkendt",
+                    MessegeTouser = $"Der er sket en fejl som gøre at indhold ikke blive opdateret. - Fejl besked: {ex.Message}",
                     Message = $"{ex.Message} - {ex}",
                     Status = EnumStatusValue.Error,
                 };
