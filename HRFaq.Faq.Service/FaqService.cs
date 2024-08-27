@@ -46,7 +46,7 @@ namespace HRFaq.Faq.Service
             {
                 result.Data = new ResponseModel()
                 {
-                    MessegeTouser = "Indhold der er angivet bliver ikke godkendt",
+                    MessegeTouser = $"Der er sket en fejl ved matchword - Fejl besked: {ex.Message}",
                     Message = $"{ex.Message} - {ex}",
                     Status = EnumStatusValue.Error,
                 };
@@ -100,6 +100,7 @@ namespace HRFaq.Faq.Service
             {
                 result.Data = new ResponseModel()
                 {
+                    MessegeTouser = $"Der er sket en fejl prøv igen. Fejl besked: {ex.Message}",
                     Message = $"{ex.Message} - {ex}",
                     Status = EnumStatusValue.Error,
                 };
@@ -168,6 +169,7 @@ namespace HRFaq.Faq.Service
             {
                 result.Data = new ResponseModel()
                 {
+                    MessegeTouser = $"Der er sket en fejl prøv igen. Fejl besked: {ex.Message}",
                     Message = $"{ex.Message} - {ex}",
                     Status = EnumStatusValue.Error,
                 };
@@ -204,6 +206,7 @@ namespace HRFaq.Faq.Service
             {
                 result.Data = new ResponseModel()
                 {
+                    MessegeTouser = $"Der er sket en fejl prøv igen. Fejl besked: {ex.Message}",
                     Message = $"{ex.Message} - {ex}",
                     Status = EnumStatusValue.Error,
                 };
