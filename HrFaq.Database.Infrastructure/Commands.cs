@@ -1,21 +1,13 @@
 ﻿using BlazorHrFaq.Database.Model;
 using Extensions;
+using HrFaq.Database.Infrastructure;
 using HrFaq.Settings.Model;
 using Microsoft.EntityFrameworkCore;
 using static System.Net.Mime.MediaTypeNames;
 
 namespace BlazorHrFaq.Database.Infrastructure
 {
-    public interface ICommands
-    {
-        Task<List<Tuple<string>>> GetFaq();
-        Task<List<Tuple<string, int>>> GetFaq(string text);
-        Task<bool> CreateFaq(string searchwords, string answer);
-        Task<Tuple<int, string>> AddMatchData(string text, string value);
-        Task<List<Tuple<string, string, string>>> GetMatchData();
-        Task<List<SettingModel>> SettingInformation();
-        Task<bool> SaveSettingInfo(SettingModel model);
-    }
+    
     public class Commands : ICommands
     {
         public async Task<Tuple<int, string>> AddMatchData(string text, string value)
