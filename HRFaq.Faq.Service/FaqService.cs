@@ -5,6 +5,7 @@ using Helpers.ResponseModel;
 using System.Text.RegularExpressions;
 using System.Windows.Input;
 using static System.Net.Mime.MediaTypeNames;
+using HrFaq.Database.Infrastructure;
 
 namespace HRFaq.Faq.Service
 {

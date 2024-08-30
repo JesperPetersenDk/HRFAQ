@@ -1,15 +1,16 @@
-﻿@page "/delete-matchword/{codeValue}"
+﻿@page "/delete-matchword/{codeValueInput}"
 @inject NavigationManager NavManager
+@inject ISettingsService settings
 
 @code {
     [Parameter]
-    public string codeValue { get; set; }
+    public string codeValueInput { get; set; }
 
 
     protected override async Task OnInitializedAsync()
     {
-        await base.OnInitializedAsync();
-        
-        NavManager.NavigateTo("information-update");
+        //await base.OnInitializedAsync();
+        await settings.RemoveMatchWordsFromContent(codeValueInput);
+        NavManager.NavigateTo("matchword");
     }
 }

@@ -1,5 +1,6 @@
 ﻿using BlazorHrFaq.Database.Infrastructure;
 using Helpers.ResponseModel;
+using HrFaq.Database.Infrastructure;
 using HrFaq.Settings.Model;
 
 namespace HrFaq.Settings.Service
@@ -8,6 +9,7 @@ namespace HrFaq.Settings.Service
     {
         Task<ResponseModel> GetSettingInformation();
         Task<ResponseModel> UpdateSettingInformation(SettingModel model);
+        Task<ResponseModel> RemoveMatchWordStatus();
         Task<ResponseModel> RemoveMatchWordsFromContent(string codeValue);
     }
 
@@ -67,9 +69,65 @@ namespace HrFaq.Settings.Service
             return result.Data;
         }
 
-        public Task<ResponseModel> RemoveMatchWordsFromContent(string codeValue)
+        public async Task<ResponseModel> RemoveMatchWordsFromContent(string codeValueInput)
         {
-            throw new NotImplementedException();
+            var result = new ResponseDataModel();
+            try
+            {
+                var com = await _com.RemoveMatchWordAndRemoveMatchFromContent(codeValueInput);
+                if (com)
+                {
+                    result.Data = new ResponseModel()
+                    {
+                        Message = "Remove Match word + Remove Match Word from content",
+                        Status = EnumStatusValue.Success
+                    };
+                }
+                else
+                {
+                    result.Data = new ResponseModel()
+                    {
+                        Message = "Failed to remove match word from content.",
+                        Status = EnumStatusValue.Failed
+                    };
+                }
+                
+            }
+            catch (Exception ex)
+            {
+                result.Data = new ResponseModel()
+                {
+                    MessegeTouser = $"Der kunne ikke blive hentet indhold - Fejl besked {ex.Message}",
+                    Message = $"{ex.Message} - {ex}",
+                    Status = EnumStatusValue.Error,
+                };
+            }
+            return result.Data;
+        }
+
+        public async Task<ResponseModel> RemoveMatchWordStatus()
+        {
+            var result = new ResponseDataModel();
+            try
+            {
+                var resultData = await _com.RemoveMatchWordBool();
+                result.Data = new ResponseModel()
+                {
+                    Message = (resultData) ? "Can remove match word" : "Cant remove match word",
+                    Status = (resultData) ? EnumStatusValue.Success : EnumStatusValue.Info,
+                    GetData = new[] { resultData }
+                };
+            }
+            catch (Exception ex)
+            {
+                result.Data = new ResponseModel()
+                {
+                    MessegeTouser = $"Der kunne ikke blive hentet indhold - Fejl besked {ex.Message}",
+                    Message = $"{ex.Message} - {ex}",
+                    Status = EnumStatusValue.Error,
+                };
+            }
+            return result.Data;
         }
 
         public async Task<ResponseModel> UpdateSettingInformation(SettingModel model)
