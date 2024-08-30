@@ -9,4 +9,5 @@ Dette system indeholder, at man vil kunne stille spørgsmål, og så vil der væ
 Der er gjort brug af disse her:
 - C#, Blazor
 - Tailwind
+- Xunit (Test)
 
