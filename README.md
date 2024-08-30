@@ -35,6 +35,7 @@ Der er gjort brug af disse her:
 - Entity framework
 - Tailwind Design
 - Xunit (Test)
+- Docker (Få det til at spille i forhold til at database mv skal køre igennem Docker også)
 
 #### Security and Access Control
 Det bliver kigget på senere.
