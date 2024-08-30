@@ -1,6 +1,7 @@
 ﻿using BlazorHrFaq.Database.Model;
 using Extensions;
 using HrFaq.Database.Infrastructure;
+using HrFaq.Settings.Model;
 using Microsoft.EntityFrameworkCore;
 
 namespace BlazorHrFaq.Database.Infrastructure
