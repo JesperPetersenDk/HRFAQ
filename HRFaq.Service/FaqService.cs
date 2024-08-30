@@ -1,11 +1,8 @@
-﻿using BlazorHrFaq.Database.Infrastructure;
+﻿using Extensions;
 using FaqModel;
-using HrFaq.TextHelper;
 using Helpers.ResponseModel;
-using System.Text.RegularExpressions;
-using System.Windows.Input;
-using static System.Net.Mime.MediaTypeNames;
 using HrFaq.Database.Infrastructure;
+using HrFaq.TextHelper;
 
 namespace HRFaq.Faq.Service
 {

@@ -21,7 +21,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\HrFaq.Helper\HrFaq.TextHelper.csproj" />
     <ProjectReference Include="..\HrFaq.Model\HrFaq.Model.csproj" />
   </ItemGroup>
 

@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\HrFaq.Database.Database\HrFaq.Database.csproj" />
+    <ProjectReference Include="..\HrFaq.Helper\HrFaq.TextHelper.csproj" />
     <ProjectReference Include="..\HrFaq.Model\HrFaq.Model.csproj" />
     <ProjectReference Include="..\HRFaq.ResponseModel\HrFaq.ResponseModel.csproj" />
   </ItemGroup>
