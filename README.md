@@ -11,6 +11,24 @@ Formålet er at kunne besvare medarbejderspørgsmål inden for det område, som 
 Målgruppen for dette er at gøre arbejdet lettere for HR-medarbejdere. Her vil brugerne let og enkelt kunne få besvaret deres spørgsmål inden for det område, som medarbejderen søger efter.
  
 ### Technologies
+Her vil der være tale om 'Technologies' for projekt. Det er alt lige fra design, overvejelse af muligheder for siden og Test og Kvalitetssikring af HR systemet.
+
+#### Integrations
+Der er som udgangspunkt ingen Integrationer til andre system.
+
+#### Functions
+- Søgning efter fx emner som er valgt at HR-ejer.
+- Opsætning af Regler for hvad systemet skal gøre.
+- Oprettelse af svare til bruger
+- Oprettelse af "Match word" som kan bruges flere steder.
+
+#### Functions (the future)
+- Log ind system - Bruger skal log ind med sin bruger.
+- Rapport om hvor mange spørgsmål der bliver stillet
+- Flere svare eller kun et svar tilbage (Admin bestemmer)
+- Vil kunne opdele kategori i forhold til ens arbejdes område.
+
+#### Development
 Der er gjort brug af disse her:
 - C#
 - Blazor
@@ -18,3 +36,5 @@ Der er gjort brug af disse her:
 - Tailwind Design
 - Xunit (Test)
 
+#### Security and Access Control
+Det bliver kigget på senere.
