@@ -7,7 +7,9 @@ Dette system indeholder, at man vil kunne stille spørgsmål, og så vil der væ
  
 ### Technologies
 Der er gjort brug af disse her:
-- C#, Blazor
+- C#
+- Blazor
+- Entity framework
 - Tailwind
 - Xunit (Test)
 
