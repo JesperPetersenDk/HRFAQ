@@ -9,7 +9,6 @@
   <ItemGroup>
     <ProjectReference Include="..\HrFaq.Database.Infrastructure\HrFaq.Database.Infrastructure.csproj" />
     <ProjectReference Include="..\HRFaq.ResponseModel\HrFaq.ResponseModel.csproj" />
-    <ProjectReference Include="..\HrFaq.Settings.Model\HrFaq.Settings.Model.csproj" />
   </ItemGroup>
 
 </Project>

@@ -11,7 +11,7 @@
     <ProjectReference Include="..\Extensions\Extensions.csproj" />
     <ProjectReference Include="..\HrFaq.Database.Database\HrFaq.Database.csproj" />
     <ProjectReference Include="..\HrFaq.Extensions\HrFaq.Extensions.csproj" />
-    <ProjectReference Include="..\HrFaq.Settings.Model\HrFaq.Settings.Model.csproj" />
+    <ProjectReference Include="..\HrFaq.Faq.Model\HrFaq.Model.csproj" />
   </ItemGroup>
 
 </Project>
