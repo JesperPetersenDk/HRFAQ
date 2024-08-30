@@ -9,12 +9,11 @@ namespace BlazorHrFaq.Database.Infrastructure
     
     public class Commands : ICommands
     {
-        public async Task<Tuple<int, string>> AddMatchData(string text, string value)
+        public async Task<int> AddMatchData(string text, string value, string codeValue)
         {
             using (var db = new DatabaseDb())
             {
                 int saveInDatabase = 0; // False to save in database
-                string codeValue = Extensions.Extensions.FormatFileType(value);
                 MatchData matchData = new MatchData
                 {
                     CodeValue = codeValue,
@@ -25,7 +24,7 @@ namespace BlazorHrFaq.Database.Infrastructure
                 await db.Match.AddAsync(matchData);
                 saveInDatabase = await db.SaveChangesAsync();
 
-                return Tuple.Create(saveInDatabase, codeValue);
+                return saveInDatabase;
             }
         }
 

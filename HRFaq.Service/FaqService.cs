@@ -30,16 +30,17 @@ namespace HRFaq.Faq.Service
             var result = new ResponseDataModel();
             try
             {
-                var resultData = await _com.AddMatchData(model.Text, model.Value);
-                int returnBoolData = resultData.Item1;
+                string codeValue = Extensions.Extensions.FormatFileType(model.Value);
+                var resultData = await _com.AddMatchData(model.Text, model.Value, codeValue);
+                int returnBoolData = resultData;
                 MatchViewModel dataModel = new MatchViewModel();
-                dataModel.Code = resultData.Item2;
+                dataModel.Code = codeValue;
 
                 result.Data = new ResponseModel()
                 {
                     Message = (returnBoolData > 0) ? "Succes to save in database" : "Error to add in MatchData - Database",
                     MessegeTouser = (returnBoolData > 0) ? "Indholdet er gemt." : "Der er sket en fejl i tilføjelse til databasen",
-                    Status = EnumStatusValue.Info,
+                    Status = (returnBoolData > 0) ? EnumStatusValue.Success : EnumStatusValue.Failed,
                     GetData = new[] { dataModel }
                 };
             }
