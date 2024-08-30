@@ -1,0 +1,16 @@
+﻿@page "/delete-matchword/{codeValueInput}"
+@inject NavigationManager NavManager
+@inject ISettingsService settings
+
+@code {
+    [Parameter]
+    public string codeValueInput { get; set; }
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        //await base.OnInitializedAsync();
+        await settings.RemoveMatchWordsFromContent(codeValueInput);
+        NavManager.NavigateTo("matchword");
+    }
+}

@@ -2,6 +2,7 @@
 
 @inject ILoggningService _log
 @inject IFaqService _faq
+@inject ISettingsService setting
 @inject NavigationManager nav
 
 <div class="mx-auto max-w-3xl text-center">
@@ -40,6 +41,10 @@
             <table class="table-auto">
                 <thead>
                     <tr>
+                        @if (StatusMatchWord)
+                        {
+                            <th></th>
+                        }
                         <th>Kode</th>
                         <th>Link</th>
                         <th>Tekst</th>
@@ -49,9 +54,19 @@
                 <tbody>
                     @foreach (var item in modelList)
                     {
+                        int lengthCount = 35;
+                        string textValue = (item.Value.Length > lengthCount) ? item.Value.Substring(0, lengthCount) + "..." : item.Value;
                         <tr>
+                            @if (StatusMatchWord)
+                            {
+                                <td class="px-4 py-2">
+                                    <a href="/delete-matchword/@item.CodeValue.Replace("{{","").Replace("}}","")" class="rounded-[1rem] bg-red-500 p-2 text-white hover:bg-red-600">
+                                        Fjern
+                                    </a>
+                                </td>
+                            }
                             <td class="px-4 py-2">@item.CodeValue</td>
-                            <td class="px-4 py-2">@item.Value</td>
+                            <td class="px-4 py-2">@textValue</td>
                             <td class="px-4 py-2">@item.Text</td>
                             <td class="px-4 py-2">@((item.MatchWord) ? "I brug" : "")</td>
                         </tr>
@@ -73,6 +88,7 @@
     public bool searchData { get; set; } = false;
     public EnumStatusValue status { get; set; }
     public string message { get; set; } = string.Empty;
+    public bool StatusMatchWord { get; set; } = false;
 
 
     MatchViewModel model = new MatchViewModel();
@@ -102,6 +118,17 @@
                             });
                     }
                 }
+            }
+        }
+
+        //settings information
+        var resultDataBool = await setting.RemoveMatchWordStatus();
+        if(resultDataBool != null)
+        {
+            var resultboolCast = resultDataBool.GetData.Cast<bool>().FirstOrDefault();
+            if(resultboolCast)
+            {
+                StatusMatchWord = resultboolCast;
             }
         }
     }

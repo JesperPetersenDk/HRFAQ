@@ -106,6 +106,53 @@ namespace BlazorHrFaq.Database.Infrastructure
             }
         }
 
+        public async Task<bool> RemoveMatchWordAndRemoveMatchFromContent(string codeValue)
+        {
+            using (var db = new DatabaseDb())
+            {
+                bool returnData = false;
+                var resultData = await db.SettingInfo.FirstOrDefaultAsync();
+                if(resultData != null && resultData.RemoveMatchWords)
+                {
+                    var resultContent = await db.Faq.Where(r => r.Answer.Contains(codeValue)).ToListAsync();
+                    if (resultContent.Count() > 0)
+                    {
+                        // Loop through each item in resultContent
+                        foreach (var item in resultContent)
+                        {
+                            // Use Regex to remove placeholders like {{site:6a077be658}}
+                            item.Answer = System.Text.RegularExpressions.Regex.Replace(item.Answer, @"{{site:[^}]+}}", "");
+
+                            // Trim any extra spaces that may be left after removal
+                            item.Answer = item.Answer.Trim();
+                        }
+
+                        // Save the changes to the database
+                        await db.SaveChangesAsync();
+                    }
+
+                    var resultRemove = await db.Match.FirstOrDefaultAsync(r => r.CodeValue.Contains(codeValue));
+                    if(resultRemove != null)
+                    {
+                        db.Match.Remove(resultRemove);
+                        int saveInDatabase = await db.SaveChangesAsync();
+
+                        returnData = (saveInDatabase > 0) ? true : false;
+                    }
+                }
+                return returnData;
+            }
+        }
+
+        public async Task<bool> RemoveMatchWordBool()
+        {
+            using (var db = new DatabaseDb())
+            {
+                var result = await db.SettingInfo.FirstOrDefaultAsync();
+                return (result != null && result.RemoveMatchWords) ? true : false;
+            }
+        }
+
         public async Task<bool> SaveSettingInfo(SettingModel model)
         {
             using (var db = new DatabaseDb())
