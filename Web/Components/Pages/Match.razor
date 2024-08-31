@@ -143,8 +143,6 @@
             var dataResult = resultData.GetData.Cast<MatchViewModel>().FirstOrDefault();
             if (dataResult != null)
             {
-                model.Code = dataResult.Code;
-                //Reload page
                 nav.NavigateTo("matchword");
             }
         }
