@@ -1,9 +1,8 @@
-﻿using BlazorHrFaq.Database.Infrastructure;
-using Helpers.ResponseModel;
+﻿using Helpers.ResponseModel;
 using HrFaq.Database.Infrastructure;
-using HrFaq.Settings.Model;
+using Model;
 
-namespace HrFaq.Settings.Service
+namespace Service
 {
     public interface ISettingsService
     {
@@ -28,9 +27,9 @@ namespace HrFaq.Settings.Service
                 var com = await _com.SettingInformation();
                 var resultData = com.Cast<SettingModel>().ToList();
                 SettingModel model = new SettingModel();
-                if(resultData != null && resultData.Count() > 0)
+                if (resultData != null && resultData.Count() > 0)
                 {
-                    foreach( var item in resultData)
+                    foreach (var item in resultData)
                     {
                         model.AnswerMuli = item.AnswerMuli;
                         model.RemoveMatchWords = item.RemoveMatchWords;
@@ -91,7 +90,7 @@ namespace HrFaq.Settings.Service
                         Status = EnumStatusValue.Failed
                     };
                 }
-                
+
             }
             catch (Exception ex)
             {
@@ -113,8 +112,8 @@ namespace HrFaq.Settings.Service
                 var resultData = await _com.RemoveMatchWordBool();
                 result.Data = new ResponseModel()
                 {
-                    Message = (resultData) ? "Can remove match word" : "Cant remove match word",
-                    Status = (resultData) ? EnumStatusValue.Success : EnumStatusValue.Info,
+                    Message = resultData ? "Can remove match word" : "Cant remove match word",
+                    Status = resultData ? EnumStatusValue.Success : EnumStatusValue.Info,
                     GetData = new[] { resultData }
                 };
             }
