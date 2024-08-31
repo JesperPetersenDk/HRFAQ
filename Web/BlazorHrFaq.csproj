@@ -14,9 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\HrFaq.Helper\HrFaq.Helper.csproj" />
-    <ProjectReference Include="..\HrFaq.Model\HrFaq.Model.csproj" />
-    <ProjectReference Include="..\HRFaq.Service\HrFaq.Service.csproj" />
+    <ProjectReference Include="..\HRFaq.Application\HrFaq.Application.csproj" />
   </ItemGroup>
 
 </Project>
