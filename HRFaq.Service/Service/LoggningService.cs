@@ -3,7 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Serilog;
 using Serilog.Core;
 
-namespace HrFaq.Service.Service
+namespace Service
 {
     public interface ILoggningService
     {

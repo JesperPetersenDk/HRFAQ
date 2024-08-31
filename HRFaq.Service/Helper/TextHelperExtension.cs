@@ -1,4 +1,4 @@
-﻿using HrFaq.TextHelper;
+﻿using HrFaq.Application.Helper;
 
 namespace System
 {

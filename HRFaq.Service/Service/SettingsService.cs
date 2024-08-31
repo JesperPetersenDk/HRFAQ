@@ -1,9 +1,8 @@
-﻿using BlazorHrFaq.Database.Infrastructure;
-using Helpers.ResponseModel;
+﻿using Helpers.ResponseModel;
 using HrFaq.Database.Infrastructure;
-using HrFaq.Settings.Model;
+using Model;
 
-namespace HrFaq.Service.Service
+namespace Service
 {
     public interface ISettingsService
     {

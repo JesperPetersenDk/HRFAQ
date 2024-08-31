@@ -1,4 +1,4 @@
-﻿namespace HrFaq.Settings.Model
+﻿namespace Model
 {
     public class SettingModel
     {
