@@ -1,9 +1,7 @@
 using BlazorHrFaq.Components;
 using BlazorHrFaq.Database.Infrastructure;
 using HrFaq.Database.Infrastructure;
-using HrFaq.Settings.Service;
-using HRFaq.Faq.Service;
-using HRFaq.Loggning.Service;
+using HrFaq.Service.Service;
 
 var builder = WebApplication.CreateBuilder(args);
 
