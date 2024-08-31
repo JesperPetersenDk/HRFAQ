@@ -20,8 +20,4 @@
     <PackageReference Include="Microsoft.SqlServer.Server" Version="1.0.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\HrFaq.Model\HrFaq.Model.csproj" />
-  </ItemGroup>
-
 </Project>

@@ -1,10 +1,10 @@
 ﻿using Extensions;
 using FaqModel;
 using Helpers.ResponseModel;
+using HrFaq.Application.Helper;
 using HrFaq.Database.Infrastructure;
-using HrFaq.TextHelper;
 
-namespace HRFaq.Faq.Service
+namespace Service
 {
     public interface IFaqService
     {
@@ -27,7 +27,7 @@ namespace HRFaq.Faq.Service
             var result = new ResponseDataModel();
             try
             {
-                string codeValue = Extensions.Extensions.FormatFileType(model.Value);
+                string codeValue = model.Value.FormatFileType();
                 var resultData = await _com.AddMatchData(model.Text, model.Value, codeValue);
                 int returnBoolData = resultData;
                 MatchViewModel dataModel = new MatchViewModel();
@@ -35,9 +35,9 @@ namespace HRFaq.Faq.Service
 
                 result.Data = new ResponseModel()
                 {
-                    Message = (returnBoolData > 0) ? "Succes to save in database" : "Error to add in MatchData - Database",
-                    MessegeTouser = (returnBoolData > 0) ? "Indholdet er gemt." : "Der er sket en fejl i tilføjelse til databasen",
-                    Status = (returnBoolData > 0) ? EnumStatusValue.Success : EnumStatusValue.Failed,
+                    Message = returnBoolData > 0 ? "Succes to save in database" : "Error to add in MatchData - Database",
+                    MessegeTouser = returnBoolData > 0 ? "Indholdet er gemt." : "Der er sket en fejl i tilføjelse til databasen",
+                    Status = returnBoolData > 0 ? EnumStatusValue.Success : EnumStatusValue.Failed,
                     GetData = new[] { dataModel }
                 };
             }
@@ -59,7 +59,7 @@ namespace HRFaq.Faq.Service
             try
             {
                 var resultData = await _com.GetFaq(answers);
-                if(resultData != null && resultData.Count() > 0)
+                if (resultData != null && resultData.Count() > 0)
                 {
                     //Add Item to model
                     ListItemModel listItemModel = new ListItemModel();
@@ -213,6 +213,6 @@ namespace HRFaq.Faq.Service
             return result.Data;
         }
 
-        
+
     }
 }

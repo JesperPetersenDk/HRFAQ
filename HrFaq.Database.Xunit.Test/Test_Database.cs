@@ -1,6 +1,6 @@
 namespace HrFaq.Database.Xunit.Test
 {
-    public class UnitTest1
+    public class Test_Database
     {
         [Fact]
         public void Test1()

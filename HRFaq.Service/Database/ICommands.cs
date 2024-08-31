@@ -1,5 +1,7 @@
 ﻿
 
+using Model;
+
 namespace HrFaq.Database.Infrastructure
 {
     public interface ICommands
