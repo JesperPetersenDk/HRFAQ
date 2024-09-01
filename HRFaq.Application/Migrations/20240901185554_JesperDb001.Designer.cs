@@ -9,18 +9,18 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace BlazorHrFaq.Database.Migrations
+namespace HrFaq.Application.Migrations
 {
     [DbContext(typeof(DatabaseDb))]
-    [Migration("20240824163749_JesperDb06")]
-    partial class JesperDb06
+    [Migration("20240901185554_JesperDb001")]
+    partial class JesperDb001
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.7")
+                .HasAnnotation("ProductVersion", "8.0.8")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -52,25 +52,25 @@ namespace BlazorHrFaq.Database.Migrations
                     b.HasData(
                         new
                         {
-                            FaqId = new Guid("ab149676-7460-4acb-8709-d0c5da325a1d"),
+                            FaqId = new Guid("4c512596-f445-4288-98d6-6dfc5cac2e91"),
                             Answer = "Hello world",
-                            CreateDatetime = new DateTime(2024, 8, 24, 18, 37, 48, 754, DateTimeKind.Local).AddTicks(3835),
+                            CreateDatetime = new DateTime(2024, 9, 1, 20, 55, 54, 61, DateTimeKind.Local).AddTicks(3303),
                             HitCount = 1,
                             SearchWords = "Hej"
                         },
                         new
                         {
-                            FaqId = new Guid("27554c9c-9908-4502-bd86-eab867007cca"),
+                            FaqId = new Guid("f7b32e68-9fad-423a-b00d-e6fa9fab2db0"),
                             Answer = "Hello world",
-                            CreateDatetime = new DateTime(2024, 8, 24, 18, 37, 48, 754, DateTimeKind.Local).AddTicks(3892),
+                            CreateDatetime = new DateTime(2024, 9, 1, 20, 55, 54, 61, DateTimeKind.Local).AddTicks(3349),
                             HitCount = 1,
                             SearchWords = "Jesper"
                         },
                         new
                         {
-                            FaqId = new Guid("aad30447-2a5c-42b5-9ffb-911ce6992110"),
+                            FaqId = new Guid("d1e47480-3065-45a2-b77c-d8fdce743211"),
                             Answer = "Hello world",
-                            CreateDatetime = new DateTime(2024, 8, 24, 18, 37, 48, 754, DateTimeKind.Local).AddTicks(3895),
+                            CreateDatetime = new DateTime(2024, 9, 1, 20, 55, 54, 61, DateTimeKind.Local).AddTicks(3352),
                             HitCount = 1,
                             SearchWords = "Test"
                         });
@@ -97,6 +97,47 @@ namespace BlazorHrFaq.Database.Migrations
                     b.HasKey("MatchId");
 
                     b.ToTable("Match");
+                });
+
+            modelBuilder.Entity("HrFaq.Database.Model.SettingInfo", b =>
+                {
+                    b.Property<Guid>("SettingInfoId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("AnswerMuli")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("CompanyCategory")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("LinkTarget")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("LoginUser")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("RemoveMatchWords")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("StatusRapport")
+                        .HasColumnType("bit");
+
+                    b.HasKey("SettingInfoId");
+
+                    b.ToTable("SettingInfo");
+
+                    b.HasData(
+                        new
+                        {
+                            SettingInfoId = new Guid("cfd4f342-7b49-4d16-b4ab-220d2cb1b70f"),
+                            AnswerMuli = true,
+                            CompanyCategory = false,
+                            LinkTarget = true,
+                            LoginUser = false,
+                            RemoveMatchWords = false,
+                            StatusRapport = true
+                        });
                 });
 #pragma warning restore 612, 618
         }

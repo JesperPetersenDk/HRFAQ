@@ -3,6 +3,7 @@
 
 @inject ILoggningService _log
 @inject ISettingsService info
+@inject NavigationManager nav
 
 <PageTitle>Home</PageTitle>
 
@@ -32,10 +33,6 @@ else
                         <InputCheckbox @bind-Value="modelData.AnswerMuli" />
                     </div>
                     <div class="mt-5 w-full border border-gray-200 bg-gray-200 p-3">
-                        @TextHelperResFile.SettingLink
-                        <InputCheckbox @bind-Value="modelData.LinkTarget" />
-                    </div>
-                    <div class="mt-5 w-full border border-gray-200 bg-gray-200 p-3">
                         @TextHelperResFile.SettingLoginUser
                         <InputCheckbox @bind-Value="modelData.LoginUser" />
                     </div>
@@ -59,34 +56,33 @@ else
 }
 
 @code {
+    private bool _isInitialized;
+
     [SupplyParameterFromForm]
     SettingModel modelData { get; set; } = new SettingModel();
 
     public string message { get; set; } = string.Empty;
     public EnumStatusValue status { get; set; }
 
-    private void CheckboxChecked(ChangeEventArgs e, string boxName)
-    {
-        Console.WriteLine(boxName + " selected: " + e.Value);
-    }
-
     protected override async Task OnInitializedAsync()
     {
-        _log.Log("User show the page. - Setting", EnumStatusValue.Info);
-
-        var result = await info.GetSettingInformation();
-        var resultData = result.GetData.Cast<SettingModel>().FirstOrDefault();
-        if(resultData != null)
+        if (!_isInitialized)
         {
-            modelData.RemoveMatchWords = resultData.RemoveMatchWords;
-            modelData.AnswerMuli = resultData.AnswerMuli;
-            modelData.StatusRapport = resultData.StatusRapport;
-            modelData.CompanyCategory = resultData.CompanyCategory;
-            modelData.LoginUser = resultData.LoginUser;
-            modelData.LinkTarget = resultData.LinkTarget;
-        }
+            _isInitialized = true;
+            _log.Log("User show the page. - Setting", EnumStatusValue.Info);
 
-        //return base.OnInitializedAsync();
+            var result = await info.GetSettingInformation();
+            var resultData = result.GetData.Cast<SettingModel>().FirstOrDefault();
+            if (resultData != null)
+            {
+                modelData.RemoveMatchWords = resultData.RemoveMatchWords;
+                modelData.AnswerMuli = resultData.AnswerMuli;
+                modelData.StatusRapport = resultData.StatusRapport;
+                modelData.CompanyCategory = resultData.CompanyCategory;
+                modelData.LoginUser = resultData.LoginUser;
+            }
+            StateHasChanged();
+        }
     }
 
     private async Task HandleSubmitUpdateSettings()
@@ -94,5 +90,9 @@ else
         var result = await info.UpdateSettingInformation(modelData);
         status = result.Status;
         message = result.MessegeTouser;
+        _log.Log(message, status);
+
+        // Opdaterer UI med den nye status og besked uden at navigere væk
+        StateHasChanged();
     }
 }

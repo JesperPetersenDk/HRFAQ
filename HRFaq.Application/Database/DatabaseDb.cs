@@ -67,8 +67,7 @@ namespace BlazorHrFaq.Database
                         RemoveMatchWords = false,
                         StatusRapport = true,
                         CompanyCategory = false,
-                        LoginUser = false,
-                        LinkTarget = true
+                        LoginUser = false
                     }
                 );
         }

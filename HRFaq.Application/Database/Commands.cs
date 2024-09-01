@@ -51,7 +51,7 @@ namespace BlazorHrFaq.Database.Infrastructure
             }
         }
 
-        public async Task<string> FindMatchWordReplaceToLink(string codeValueInput)
+        public async Task<string> FindMatchWordReplaceToLink(string codeValueInput, bool targetLink)
         {
             // Regex pattern to find all occurrences of {{site:XXXX}} where XXXX is a number
             var pattern = @"{{site:([a-zA-Z0-9]+)}}";
@@ -76,8 +76,7 @@ namespace BlazorHrFaq.Database.Infrastructure
                     if (replaceContent != null)
                     {
                         string replacement = string.Empty;
-                        var settingsInfo = await db.SettingInfo.FirstOrDefaultAsync();
-                        if (settingsInfo != null &&settingsInfo.LinkTarget)
+                        if (targetLink)
                         {
                             replacement = $"<a href=\"{replaceContent.Value}\" target=\"_blank\">{replaceContent.Text}</a>";
                         }
@@ -203,14 +202,13 @@ namespace BlazorHrFaq.Database.Infrastructure
             using (var db = new DatabaseDb())
             {
                 var resultData = await db.SettingInfo.FirstOrDefaultAsync();
-                if(resultData != null )
+                if(resultData != null)
                 {
                     resultData.AnswerMuli = model.AnswerMuli;
                     resultData.RemoveMatchWords = model.RemoveMatchWords;
                     resultData.LoginUser = model.LoginUser;
                     resultData.CompanyCategory = model.CompanyCategory;
                     resultData.StatusRapport = model.StatusRapport;
-                    resultData.LinkTarget = model.LinkTarget;
                     int saveInDatabase = await db.SaveChangesAsync();
                     return (saveInDatabase > 0) ? true : false;
                 }

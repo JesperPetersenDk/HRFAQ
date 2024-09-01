@@ -4,23 +4,20 @@ using BlazorHrFaq.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace BlazorHrFaq.Database.Migrations
+namespace HrFaq.Application.Migrations
 {
     [DbContext(typeof(DatabaseDb))]
-    [Migration("20240826154133_JesperDb09")]
-    partial class JesperDb09
+    partial class DatabaseDbModelSnapshot : ModelSnapshot
     {
-        /// <inheritdoc />
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.7")
+                .HasAnnotation("ProductVersion", "8.0.8")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -52,25 +49,25 @@ namespace BlazorHrFaq.Database.Migrations
                     b.HasData(
                         new
                         {
-                            FaqId = new Guid("cfa82d8c-1420-4cd1-9a0b-c3f37b5681f5"),
+                            FaqId = new Guid("4c512596-f445-4288-98d6-6dfc5cac2e91"),
                             Answer = "Hello world",
-                            CreateDatetime = new DateTime(2024, 8, 26, 17, 41, 33, 91, DateTimeKind.Local).AddTicks(3233),
+                            CreateDatetime = new DateTime(2024, 9, 1, 20, 55, 54, 61, DateTimeKind.Local).AddTicks(3303),
                             HitCount = 1,
                             SearchWords = "Hej"
                         },
                         new
                         {
-                            FaqId = new Guid("759f77ea-afca-4df4-8a2a-bbcb9d5f643d"),
+                            FaqId = new Guid("f7b32e68-9fad-423a-b00d-e6fa9fab2db0"),
                             Answer = "Hello world",
-                            CreateDatetime = new DateTime(2024, 8, 26, 17, 41, 33, 91, DateTimeKind.Local).AddTicks(3272),
+                            CreateDatetime = new DateTime(2024, 9, 1, 20, 55, 54, 61, DateTimeKind.Local).AddTicks(3349),
                             HitCount = 1,
                             SearchWords = "Jesper"
                         },
                         new
                         {
-                            FaqId = new Guid("682c5291-1175-49cb-81fd-eadc1b2204c1"),
+                            FaqId = new Guid("d1e47480-3065-45a2-b77c-d8fdce743211"),
                             Answer = "Hello world",
-                            CreateDatetime = new DateTime(2024, 8, 26, 17, 41, 33, 91, DateTimeKind.Local).AddTicks(3275),
+                            CreateDatetime = new DateTime(2024, 9, 1, 20, 55, 54, 61, DateTimeKind.Local).AddTicks(3352),
                             HitCount = 1,
                             SearchWords = "Test"
                         });
@@ -111,6 +108,9 @@ namespace BlazorHrFaq.Database.Migrations
                     b.Property<bool>("CompanyCategory")
                         .HasColumnType("bit");
 
+                    b.Property<bool>("LinkTarget")
+                        .HasColumnType("bit");
+
                     b.Property<bool>("LoginUser")
                         .HasColumnType("bit");
 
@@ -127,9 +127,10 @@ namespace BlazorHrFaq.Database.Migrations
                     b.HasData(
                         new
                         {
-                            SettingInfoId = new Guid("1427d7a2-dd7b-41dc-a030-e0a9b78e5977"),
+                            SettingInfoId = new Guid("cfd4f342-7b49-4d16-b4ab-220d2cb1b70f"),
                             AnswerMuli = true,
                             CompanyCategory = false,
+                            LinkTarget = true,
                             LoginUser = false,
                             RemoveMatchWords = false,
                             StatusRapport = true
