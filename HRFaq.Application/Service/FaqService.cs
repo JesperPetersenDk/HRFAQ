@@ -3,6 +3,7 @@ using FaqModel;
 using Helpers.ResponseModel;
 using HrFaq.Application.Helper;
 using HrFaq.Database.Infrastructure;
+using Microsoft.Extensions.Configuration;
 
 namespace Service
 {
@@ -17,9 +18,11 @@ namespace Service
     public class FaqService : IFaqService
     {
         private readonly ICommands _com;
-        public FaqService(ICommands command)
+        private readonly IConfiguration _configuration;
+        public FaqService(ICommands command, IConfiguration configuration)
         {
             _com = command;
+            _configuration = configuration;
         }
 
         public async Task<ResponseModel> MatchWord(MatchModel model)
@@ -58,6 +61,12 @@ namespace Service
             var result = new ResponseDataModel();
             try
             {
+                bool targetBool = false;
+                var targetBlank = _configuration.GetSection("SettingInformation:TargetBlankLink").Value;
+                if(targetBlank.Contains("True"))
+                {
+                    targetBool = true;
+                }
                 var resultData = await _com.GetFaq(answers);
                 if (resultData != null && resultData.Count() > 0)
                 {
@@ -68,7 +77,7 @@ namespace Service
                     //Add Item to list of model
                     foreach (var item in resultData)
                     {
-                        string answerReplaceContent = await _com.FindMatchWordReplaceToLink(item.Item1);
+                        string answerReplaceContent = await _com.FindMatchWordReplaceToLink(item.Item1, targetBool);
                         listItemModel.data.Add(new ListWithSearchDataModel
                         {
                             Answer = answerReplaceContent,

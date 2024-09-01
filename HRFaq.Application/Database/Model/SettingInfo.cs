@@ -19,7 +19,6 @@ namespace HrFaq.Database.Model
         public bool CompanyCategory { get; set; }
         public bool AnswerMuli { get; set; }
         public bool StatusRapport { get; set; }
-        public bool LinkTarget { get; set; }
 
     }
 }

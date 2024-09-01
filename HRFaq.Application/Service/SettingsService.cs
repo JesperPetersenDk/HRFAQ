@@ -36,7 +36,6 @@ namespace Service
                         model.CompanyCategory = item.CompanyCategory;
                         model.LoginUser = item.LoginUser;
                         model.StatusRapport = item.StatusRapport;
-                        model.LinkTarget = item.LinkTarget;
                     }
 
 
@@ -149,7 +148,7 @@ namespace Service
                 {
                     result.Data = new ResponseModel()
                     {
-                        MessegeTouser = "Sket en fejl i forhold til opdatering i databasen.",
+                        MessegeTouser = "Kunne ikke opdater i databasen. Prøv igen.",
                         Message = "Failed to save in Setting Information",
                         Status = EnumStatusValue.Failed,
                     };

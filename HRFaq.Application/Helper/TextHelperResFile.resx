@@ -147,9 +147,6 @@
   <data name="SettingCategori" xml:space="preserve">
     <value>Kategori område til firma - Fx bogholder vil kun få svar tilbage som omhandler dem.</value>
   </data>
-  <data name="SettingLink" xml:space="preserve">
-    <value>Ønsker du at få linket til at åben i ny fane?</value>
-  </data>
   <data name="SettingLoginUser" xml:space="preserve">
     <value>Kræver system log ind?</value>
   </data>
