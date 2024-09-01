@@ -68,9 +68,10 @@ namespace Service
                     //Add Item to list of model
                     foreach (var item in resultData)
                     {
+                        string answerReplaceContent = await _com.FindMatchWordReplaceToLink(item.Item1);
                         listItemModel.data.Add(new ListWithSearchDataModel
                         {
-                            Answer = item.Item1,
+                            Answer = answerReplaceContent,
                             HitCount = item.Item2,
                         });
                     }

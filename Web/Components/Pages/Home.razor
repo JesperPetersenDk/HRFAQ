@@ -40,11 +40,14 @@
                 <ul class="divide-y divide-gray-200">
                     @foreach (var item in modelDataList)
                     {
-                        <li class="user-card flex items-center justify-between p-3">
-                            <div class="flex items-center">
-                                <span class="ml-3 font-medium">@item.Answer</span>
-                            </div>
-                        </li>
+                        if(!string.IsNullOrEmpty(item.Answer))
+                        {
+                            <li class="user-card flex items-center justify-between p-3">
+                                <div class="flex items-center">
+                                    <span class="ml-3 font-medium">@((MarkupString)@item.Answer)</span>
+                                </div>
+                            </li>  
+                        }
                     }
                 </ul>
             </div>
