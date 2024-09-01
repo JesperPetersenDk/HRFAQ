@@ -2,6 +2,9 @@
 using HrFaq.Database.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Model;
+using System.Text;
+using System.Text.RegularExpressions;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace BlazorHrFaq.Database.Infrastructure
 {
@@ -46,6 +49,51 @@ namespace BlazorHrFaq.Database.Infrastructure
 
                 return saveInDb;
             }
+        }
+
+        public async Task<string> FindMatchWordReplaceToLink(string codeValueInput)
+        {
+            // Regex pattern to find all occurrences of {{site:XXXX}} where XXXX is a number
+            var pattern = @"{{site:([a-zA-Z0-9]+)}}";
+            var match = Regex.Match(codeValueInput, pattern);
+
+            // No matches, return the original input
+            if (!match.Success)
+                return codeValueInput;
+
+            // Use StringBuilder for efficient string manipulation
+            var result = new StringBuilder(codeValueInput);
+
+            if (match.Success)
+            {
+                // Extract the code value from the match
+                var codeValue = match.Value.Replace("{{{", "{{").Replace("}}}","}}");
+
+                using (var db = new DatabaseDb())
+                {
+                    // Find the corresponding entry in the database
+                    var replaceContent = await db.Match.FirstOrDefaultAsync(r => r.CodeValue == codeValue);
+                    if (replaceContent != null)
+                    {
+                        string replacement = string.Empty;
+                        var settingsInfo = await db.SettingInfo.FirstOrDefaultAsync();
+                        if (settingsInfo != null &&settingsInfo.LinkTarget)
+                        {
+                            replacement = $"<a href=\"{replaceContent.Value}\" target=\"_blank\">{replaceContent.Text}</a>";
+                        }
+                        else
+                        {
+                            // Return the HTML link
+                            replacement = $"<a href=\"{replaceContent.Value}\">{replaceContent.Text}</a>";
+                        }
+
+                        result.Replace(match.Value, replacement);
+                    }
+                }
+            }
+
+            // If no match is found or no corresponding database entry exists, return an empty string
+            return result.ToString();
         }
 
         public async Task<List<Tuple<string, int>>> GetFaq(string text)
@@ -162,6 +210,7 @@ namespace BlazorHrFaq.Database.Infrastructure
                     resultData.LoginUser = model.LoginUser;
                     resultData.CompanyCategory = model.CompanyCategory;
                     resultData.StatusRapport = model.StatusRapport;
+                    resultData.LinkTarget = model.LinkTarget;
                     int saveInDatabase = await db.SaveChangesAsync();
                     return (saveInDatabase > 0) ? true : false;
                 }

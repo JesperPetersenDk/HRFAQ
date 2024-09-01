@@ -36,6 +36,7 @@ namespace Service
                         model.CompanyCategory = item.CompanyCategory;
                         model.LoginUser = item.LoginUser;
                         model.StatusRapport = item.StatusRapport;
+                        model.LinkTarget = item.LinkTarget;
                     }
 
 

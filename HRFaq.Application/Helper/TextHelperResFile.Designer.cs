@@ -151,6 +151,15 @@ namespace HrFaq.Application.Helper {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Ønsker du at få linket til at åben i ny fane?.
+        /// </summary>
+        public static string SettingLink {
+            get {
+                return ResourceManager.GetString("SettingLink", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Kræver system log ind?.
         /// </summary>
         public static string SettingLoginUser {

@@ -32,6 +32,10 @@ else
                         <InputCheckbox @bind-Value="modelData.AnswerMuli" />
                     </div>
                     <div class="mt-5 w-full border border-gray-200 bg-gray-200 p-3">
+                        @TextHelperResFile.SettingLink
+                        <InputCheckbox @bind-Value="modelData.LinkTarget" />
+                    </div>
+                    <div class="mt-5 w-full border border-gray-200 bg-gray-200 p-3">
                         @TextHelperResFile.SettingLoginUser
                         <InputCheckbox @bind-Value="modelData.LoginUser" />
                     </div>
@@ -79,6 +83,7 @@ else
             modelData.StatusRapport = resultData.StatusRapport;
             modelData.CompanyCategory = resultData.CompanyCategory;
             modelData.LoginUser = resultData.LoginUser;
+            modelData.LinkTarget = resultData.LinkTarget;
         }
 
         //return base.OnInitializedAsync();
