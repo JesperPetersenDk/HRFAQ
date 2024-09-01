@@ -14,12 +14,12 @@ namespace HrFaq.Database.Model
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid SettingInfoId { get; set; } = Guid.NewGuid();
 
-        public bool LoginUser { get; set; } = false;
-        public bool RemoveMatchWords { get; set; } = false;
-        public bool CompanyCategory { get; set; } = false;
-        public bool AnswerMuli { get; set; } = true;
-        public bool StatusRapport { get; set; } = false;
-        public bool LinkTarget { get; set; } = true;
+        public bool LoginUser { get; set; }
+        public bool RemoveMatchWords { get; set; }
+        public bool CompanyCategory { get; set; }
+        public bool AnswerMuli { get; set; }
+        public bool StatusRapport { get; set; }
+        public bool LinkTarget { get; set; }
 
     }
 }
