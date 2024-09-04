@@ -1,4 +1,5 @@
 ﻿using BlazorHrFaq.Database.Model;
+using HrFaq.Application.Database.Model;
 using HrFaq.Database.Model;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -10,6 +11,8 @@ namespace BlazorHrFaq.Database
         public DbSet<Faq> Faq { get; set; }
         public DbSet<MatchData> Match { get; set; }
         public DbSet<SettingInfo> SettingInfo { get; set; }
+        public DbSet<Questions> Questions { get; set; }
+        public DbSet<QuestionStats> QuestionStats { get; set; }
         public DatabaseDb(DbContextOptions<DatabaseDb> options) : base(options)
         {
 
@@ -34,6 +37,8 @@ namespace BlazorHrFaq.Database
             modelBuilder.Entity<MatchData>().HasKey(r => r.MatchId);
 
             modelBuilder.Entity<Faq>().HasKey(r => r.FaqId);
+
+            modelBuilder.Entity<QuestionStats>().HasKey(qs => new {qs.Date, qs.QuestionType});
 
 
             modelBuilder.Entity<SettingInfo>().HasKey(r => r.SettingInfoId);

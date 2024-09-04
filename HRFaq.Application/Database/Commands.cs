@@ -1,4 +1,5 @@
 ﻿using BlazorHrFaq.Database.Model;
+using HrFaq.Application.Database.Model;
 using HrFaq.Database.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Model;
@@ -27,6 +28,23 @@ namespace BlazorHrFaq.Database.Infrastructure
                 saveInDatabase = await db.SaveChangesAsync();
 
                 return saveInDatabase;
+            }
+        }
+
+        public async Task AddQuestionStatus(string text)
+        {
+            using (var db = new DatabaseDb())
+            {
+                var result = await db.SettingInfo.FirstOrDefaultAsync();
+                if (result != null && result.StatusRapport)
+                {
+                    var question = new Questions
+                    {
+                        QuestionType = text
+                    };
+                    db.Questions.Add(question);
+                    await db.SaveChangesAsync();
+                }
             }
         }
 
@@ -237,6 +255,19 @@ namespace BlazorHrFaq.Database.Infrastructure
                     });
                 }
                 return list;
+            }
+        }
+
+        public async Task<bool> StatusRapport()
+        {
+            using (var db = new DatabaseDb())
+            {
+                var result = await db.SettingInfo.FirstOrDefaultAsync();
+                if (result != null && result.StatusRapport)
+                {
+                    return true;
+                }
+                return false;
             }
         }
     }

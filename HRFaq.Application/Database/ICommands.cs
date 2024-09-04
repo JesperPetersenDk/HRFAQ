@@ -16,5 +16,7 @@ namespace HrFaq.Database.Infrastructure
         Task<bool> RemoveMatchWordBool();
         Task<bool> RemoveMatchWordAndRemoveMatchFromContent(string codeValue);
         Task<string> FindMatchWordReplaceToLink(string codeValueInput, bool targetLink);
+        Task AddQuestionStatus(string text);
+        Task<bool> StatusRapport();
     }
 }

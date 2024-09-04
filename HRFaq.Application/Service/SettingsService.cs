@@ -10,6 +10,7 @@ namespace Service
         Task<ResponseModel> UpdateSettingInformation(SettingModel model);
         Task<ResponseModel> RemoveMatchWordStatus();
         Task<ResponseModel> RemoveMatchWordsFromContent(string codeValue);
+        Task<ResponseModel> StatusRapport();
     }
 
     public class SettingsService : ISettingsService
@@ -116,6 +117,44 @@ namespace Service
                     Status = resultData ? EnumStatusValue.Success : EnumStatusValue.Info,
                     GetData = new[] { resultData }
                 };
+            }
+            catch (Exception ex)
+            {
+                result.Data = new ResponseModel()
+                {
+                    MessegeTouser = $"Der kunne ikke blive hentet indhold - Fejl besked {ex.Message}",
+                    Message = $"{ex.Message} - {ex}",
+                    Status = EnumStatusValue.Error,
+                };
+            }
+            return result.Data;
+        }
+
+        public async Task<ResponseModel> StatusRapport()
+        {
+            var result = new ResponseDataModel();
+            try
+            {
+                bool returnDataBool = false;
+                var com = await _com.StatusRapport();
+                if (com)
+                {
+                    returnDataBool = com;
+                    result.Data = new ResponseModel()
+                    {
+                        Message = "Get status from statusrapport",
+                        Status = EnumStatusValue.Success,
+                        GetData = new[] { returnDataBool }
+                    };
+                }
+                else
+                {
+                    result.Data = new ResponseModel()
+                    {
+                        Message = "Failed to get Status rapport.",
+                        Status = EnumStatusValue.Failed,
+                    };
+                }
             }
             catch (Exception ex)
             {
