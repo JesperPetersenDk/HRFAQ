@@ -1,0 +1,23 @@
+﻿@page "/status-rapport"
+
+@inject ISettingsService set
+@inject ILoggningService _log
+@inject NavigationManager nav
+
+<h3>StatusRapport</h3>
+
+@code {
+    protected override async Task OnInitializedAsync()
+    {
+        _log.Log("Show menu to user", EnumStatusValue.Info);
+
+
+        var result = await set.StatusRapport();
+        if (result != null && result.Status != EnumStatusValue.Success && result.GetData == null)
+        {
+            nav.NavigateTo("");
+        }
+
+        //return base.OnInitializedAsync();
+    }
+}

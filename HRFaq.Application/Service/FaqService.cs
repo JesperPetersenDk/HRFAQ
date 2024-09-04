@@ -68,8 +68,13 @@ namespace Service
                     targetBool = true;
                 }
                 var resultData = await _com.GetFaq(answers);
+                //If setting for status rapport are true - Add to Database with information
+                await _com.AddQuestionStatus(answers);
+
                 if (resultData != null && resultData.Count() > 0)
                 {
+
+
                     //Add Item to model
                     ListItemModel listItemModel = new ListItemModel();
                     listItemModel.SearchWord = answers;
@@ -96,7 +101,6 @@ namespace Service
                 }
                 else
                 {
-
                     result.Data = new ResponseModel()
                     {
                         MessegeTouser = TextHelperResFile.NotAnswersToUser.ToString().ReplaceText(answers),
