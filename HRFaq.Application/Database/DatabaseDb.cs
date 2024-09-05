@@ -1,8 +1,6 @@
 ﻿using BlazorHrFaq.Database.Model;
 using HrFaq.Application.Database.Model;
-using HrFaq.Database.Model;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 
 namespace BlazorHrFaq.Database
 {
@@ -10,7 +8,6 @@ namespace BlazorHrFaq.Database
     {
         public DbSet<Faq> Faq { get; set; }
         public DbSet<MatchData> Match { get; set; }
-        public DbSet<SettingInfo> SettingInfo { get; set; }
         public DbSet<Questions> Questions { get; set; }
         public DbSet<QuestionStats> QuestionStats { get; set; }
         public DatabaseDb(DbContextOptions<DatabaseDb> options) : base(options)
@@ -40,9 +37,6 @@ namespace BlazorHrFaq.Database
 
             modelBuilder.Entity<QuestionStats>().HasKey(qs => new {qs.Date, qs.QuestionType});
 
-
-            modelBuilder.Entity<SettingInfo>().HasKey(r => r.SettingInfoId);
-
             modelBuilder.Entity<Faq>()
                 .HasData(
                     new Faq
@@ -64,17 +58,7 @@ namespace BlazorHrFaq.Database
                         SearchWords = "Test",
                     }
                 );
-            modelBuilder.Entity<SettingInfo>()
-                .HasData(
-                    new SettingInfo
-                    {
-                        AnswerMuli = true,
-                        RemoveMatchWords = false,
-                        StatusRapport = true,
-                        CompanyCategory = false,
-                        LoginUser = false
-                    }
-                );
+           
         }
     }
 }
