@@ -61,15 +61,14 @@ namespace Service
             var result = new ResponseDataModel();
             try
             {
-                bool targetBool = false;
-                var targetBlank = _configuration.GetSection("SettingInformation:TargetBlankLink").Value;
-                if(targetBlank.Contains("True"))
-                {
-                    targetBool = true;
-                }
-                var resultData = await _com.GetFaq(answers);
+                //A href need _blank here True or false here.
+                bool targetBool = bool.TryParse(_configuration["SettingInformation:TargetBlankLink"], out bool parsedTargetBlank) && parsedTargetBlank;
+
                 //If setting for status rapport are true - Add to Database with information
-                await _com.AddQuestionStatus(answers);
+                bool questionStatusBool = bool.TryParse(_configuration["SettingInformation:StatusRapport"], out bool parsedQuestionStatus) && parsedQuestionStatus;
+
+                var resultData = await _com.GetFaq(answers);
+                await _com.AddQuestionStatus(answers, questionStatusBool);
 
                 if (resultData != null && resultData.Count() > 0)
                 {

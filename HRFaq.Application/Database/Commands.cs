@@ -31,12 +31,11 @@ namespace BlazorHrFaq.Database.Infrastructure
             }
         }
 
-        public async Task AddQuestionStatus(string text)
+        public async Task AddQuestionStatus(string text, bool settingsBool)
         {
             using (var db = new DatabaseDb())
             {
-                var result = await db.SettingInfo.FirstOrDefaultAsync();
-                if (result != null && result.StatusRapport)
+                if (settingsBool)
                 {
                     var question = new Questions
                     {
@@ -168,13 +167,12 @@ namespace BlazorHrFaq.Database.Infrastructure
             }
         }
 
-        public async Task<bool> RemoveMatchWordAndRemoveMatchFromContent(string codeValue)
+        public async Task<bool> RemoveMatchWordAndRemoveMatchFromContent(string codeValue, bool settingRemoveMatchWord)
         {
             using (var db = new DatabaseDb())
             {
                 bool returnData = false;
-                var resultData = await db.SettingInfo.FirstOrDefaultAsync();
-                if(resultData != null && resultData.RemoveMatchWords)
+                if(settingRemoveMatchWord)
                 {
                     var resultContent = await db.Faq.Where(r => r.Answer.Contains(codeValue)).ToListAsync();
                     if (resultContent.Count() > 0)
@@ -206,64 +204,19 @@ namespace BlazorHrFaq.Database.Infrastructure
             }
         }
 
-        public async Task<bool> RemoveMatchWordBool()
+        public async Task<bool> RemoveMatchWordBool(bool settingRemoveMatch)
         {
             using (var db = new DatabaseDb())
             {
-                var result = await db.SettingInfo.FirstOrDefaultAsync();
-                return (result != null && result.RemoveMatchWords) ? true : false;
+                return (settingRemoveMatch) ? true : false;
             }
         }
 
-        public async Task<bool> SaveSettingInfo(SettingModel model)
+        public async Task<bool> StatusRapport(bool settingStatusRapport)
         {
             using (var db = new DatabaseDb())
             {
-                var resultData = await db.SettingInfo.FirstOrDefaultAsync();
-                if(resultData != null)
-                {
-                    resultData.AnswerMuli = model.AnswerMuli;
-                    resultData.RemoveMatchWords = model.RemoveMatchWords;
-                    resultData.LoginUser = model.LoginUser;
-                    resultData.CompanyCategory = model.CompanyCategory;
-                    resultData.StatusRapport = model.StatusRapport;
-                    int saveInDatabase = await db.SaveChangesAsync();
-                    return (saveInDatabase > 0) ? true : false;
-                }
-                else
-                {
-                    return false;
-                }
-            }
-        }
-
-        public async Task<List<SettingModel>> SettingInformation()
-        {
-            using (var db = new DatabaseDb())
-            {
-                var list = new List<SettingModel>();
-                var resultData = await db.SettingInfo.FirstOrDefaultAsync();
-                if( resultData != null)
-                {
-                    list.Add(new SettingModel
-                    {
-                        AnswerMuli = resultData.AnswerMuli,
-                        CompanyCategory = resultData.CompanyCategory,
-                        LoginUser = resultData.LoginUser,
-                        RemoveMatchWords = resultData.RemoveMatchWords,
-                        StatusRapport = resultData.StatusRapport
-                    });
-                }
-                return list;
-            }
-        }
-
-        public async Task<bool> StatusRapport()
-        {
-            using (var db = new DatabaseDb())
-            {
-                var result = await db.SettingInfo.FirstOrDefaultAsync();
-                if (result != null && result.StatusRapport)
+                if (settingStatusRapport)
                 {
                     return true;
                 }
