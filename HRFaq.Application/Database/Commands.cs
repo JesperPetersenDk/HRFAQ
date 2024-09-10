@@ -1,5 +1,6 @@
 ﻿using BlazorHrFaq.Database.Model;
 using HrFaq.Application.Database.Model;
+using HrFaq.Application.Model;
 using HrFaq.Database.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Model;
@@ -150,6 +151,30 @@ namespace BlazorHrFaq.Database.Infrastructure
             }
         }
 
+        public async Task<List<FaqListModel>> GetListFaq()
+        {
+            using (var db = new DatabaseDb())
+            {
+                var list = new List<FaqListModel>();
+                var result = await db.Faq.OrderByDescending(r => r.FaqId).ToListAsync();
+                if( result != null)
+                {
+                    foreach (var item in result)
+                    {
+                        list.Add(new FaqListModel
+                        {
+                            FaqId = item.FaqId,
+                            Answer = item.Answer,
+                            CreateDatetime = item.CreateDatetime,
+                            HitCount = item.HitCount ?? 0,
+                            SearchWords = item.SearchWords
+                        });
+                    }
+                }
+                return list;
+            }
+        }
+
         public async Task<List<Tuple<string, string,string>>> GetMatchData()
         {
             using (var db = new DatabaseDb())
@@ -164,6 +189,23 @@ namespace BlazorHrFaq.Database.Infrastructure
                     }
                 }
                 return listData;
+            }
+        }
+
+        public async Task<bool> RemoveFaqFromList(string faqId)
+        {
+            using (var db = new DatabaseDb())
+            {
+                var returnData = false;
+                var idGuid = new Guid(faqId);
+                var result = await db.Faq.FirstOrDefaultAsync(r => r.FaqId == idGuid);
+                if(result != null)
+                {
+                    db.Faq.Remove(result);
+                    int saveInDatabase = await db.SaveChangesAsync();
+                    returnData = (saveInDatabase > 0) ? true : false;
+                }
+                return returnData;
             }
         }
 

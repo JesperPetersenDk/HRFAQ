@@ -13,6 +13,8 @@ namespace Service
         Task<ResponseModel> GetAnswersList(string answers);
         Task<ResponseModel> MatchWord(MatchModel model);
         Task<ResponseModel> GetMatchWord();
+        Task<ResponseModel> GetAllFaq();
+        Task<ResponseModel> DeleteFaq(string faqId);
     }
 
     public class FaqService : IFaqService
@@ -226,6 +228,76 @@ namespace Service
             return result.Data;
         }
 
+        public async Task<ResponseModel> GetAllFaq()
+        {
+            var result = new ResponseDataModel();
+            try
+            {
+                var resultData = await _com.GetListFaq();
+                if (resultData.Any())
+                {
+                    result.Data = new ResponseModel()
+                    {
+                        Message = $"Get list from Faq",
+                        Status = EnumStatusValue.Success,
+                        GetData = resultData
+                    };
+                }
+                else
+                {
+                    result.Data = new ResponseModel()
+                    {
+                        Message = $"Failed - No Any in database",
+                        Status = EnumStatusValue.Failed,
+                    };
+                }
+            }
+            catch (Exception ex)
+            {
+                result.Data = new ResponseModel()
+                {
+                    MessegeTouser = $"Der er sket en fejl prøv igen. Fejl besked: {ex.Message}",
+                    Message = $"{ex.Message} - {ex}",
+                    Status = EnumStatusValue.Error,
+                };
+            }
+            return result.Data;
+        }
 
+        public async Task<ResponseModel> DeleteFaq(string faqId)
+        {
+            var result = new ResponseDataModel();
+            try
+            {
+                var resultData = await _com.RemoveFaqFromList(faqId);
+                if(resultData)
+                {
+                    result.Data = new ResponseModel()
+                    {
+                        Message = $"Success to remove in Database with Faq",
+                        Status = EnumStatusValue.Success,
+                    };
+                }
+                else
+                {
+                    result.Data = new ResponseModel()
+                    {
+                        Message = $"Failed to remove from database in Faq",
+                        Status = EnumStatusValue.Failed,
+                    };
+                }
+                
+            }
+            catch (Exception ex)
+            {
+                result.Data = new ResponseModel()
+                {
+                    MessegeTouser = $"Der er sket en fejl prøv igen. Fejl besked: {ex.Message}",
+                    Message = $"{ex.Message} - {ex}",
+                    Status = EnumStatusValue.Error,
+                };
+            }
+            return result.Data;
+        }
     }
 }
