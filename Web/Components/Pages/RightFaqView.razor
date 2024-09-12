@@ -1,0 +1,27 @@
+﻿@page "/rightfaq/{codeValueInput}"
+@using HrFaq.Application.Model
+
+@inject IFaqService faq
+<h3>RightFaq</h3>
+
+@code {
+    [Parameter]
+    public string codeValueInput { get; set; }
+
+    public RightFaqModel model { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        var result = await faq.GetSingleById(codeValueInput);
+        if(result != null)
+        {
+            var castData = result.GetData.Cast<RightFaqModel>().FirstOrDefault();
+            if(castData != null)
+            {
+                model.Answer = castData.Answer;
+                model.FaqId = castData.FaqId;
+                model.SearchWord = castData.SearchWord;
+            }
+        }
+    }
+}

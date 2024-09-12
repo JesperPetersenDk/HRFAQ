@@ -19,5 +19,6 @@ namespace HrFaq.Database.Infrastructure
         Task<bool> StatusRapport(bool settingStatusRapport);
         Task<List<FaqListModel>> GetListFaq();
         Task<bool> RemoveFaqFromList(string faqId);
+        Task<RightFaqModel> GetSingleFaq(string FaqId);
     }
 }
