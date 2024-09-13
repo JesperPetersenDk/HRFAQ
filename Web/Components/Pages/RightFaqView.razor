@@ -11,12 +11,12 @@
     <AlertInformation Message="@message"
                       Status="@status" />
 </div>
-<EditForm Model="@updateFaq" FormName="searchHome" OnSubmit="HandleSubmitMatch" class="mx-auto mt-4 max-w-3xl">
+<EditForm Model="@model" FormName="searchHome" OnSubmit="HandleSubmitMatch" class="mx-auto mt-4 max-w-3xl">
     <div class="grid-cols-1 grid gap-x-8 gap-y-6 sm:grid-cols-4">
         <div class="sm:col-span-4">
             <div class="mt-2.5">
                 <InputText class="w-full rounded-lg border border-gray-200 bg-gray-200 px-4 py-3 text-sm focus:bg-gray-100 focus:outline-none focus:border-purple-400"
-                           @bind-Value="updateFaq.SearchWord"
+                           @bind-Value="model.SearchWord"
                            type="text"
                            placeholder="@TextHelperResFile.InputAnswer" />
             </div>
@@ -24,7 +24,7 @@
         <div class="sm:col-span-4">
             <div class="mt-2.5">
                 <InputText class="w-full rounded-lg border border-gray-200 bg-gray-200 px-4 py-3 text-sm focus:bg-gray-100 focus:outline-none focus:border-purple-400"
-                           @bind-Value="updateFaq.SearchWord"
+                           @bind-Value="model.Answer"
                            type="text"
                            placeholder="@TextHelperResFile.InputAnswer" />
             </div>
@@ -39,8 +39,7 @@
 
 @code {
 
-    [SupplyParameterFromForm]
-    RightFaqModel updateFaq { get; set; } = new RightFaqModel
+    RightFaqModel model { get; set; } = new RightFaqModel
         {
             Answer = string.Empty,
             SearchWord = string.Empty
@@ -48,8 +47,6 @@
 
     [Parameter]
     public string codeValueInput { get; set; }
-
-    public RightFaqModel model { get; set; }
 
     public EnumStatusValue status { get; set; }
     public string message { get; set; } = string.Empty;
@@ -64,9 +61,8 @@
             var castData = result.GetData.Cast<RightFaqModel>().FirstOrDefault();
             if(castData != null)
             {
-                RightFaqModel mm = new RightFaqModel();
-                mm.Answer = castData.Answer;
-                mm.SearchWord = castData.SearchWord;
+                model.Answer = castData.Answer;
+                model.SearchWord = castData.SearchWord;
             }
         }
     }
