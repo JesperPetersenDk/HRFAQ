@@ -71,6 +71,7 @@
     {
         var resultData = await faq.UpdateFaq(codeValueInput, model.SearchWord, model.Answer);
         status = resultData.Status;
+        message = resultData.MessegeTouser;
         _log.Log(resultData.Message, status);
         if (status == EnumStatusValue.Success)
         {
