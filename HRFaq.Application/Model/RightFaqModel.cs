@@ -8,7 +8,6 @@ namespace HrFaq.Application.Model
 {
     public class RightFaqModel
     {
-        public Guid FaqId { get; set; }
         public string SearchWord { get; set; }
         public string Answer { get; set; }
     }

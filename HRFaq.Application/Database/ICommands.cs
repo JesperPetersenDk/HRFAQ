@@ -20,5 +20,6 @@ namespace HrFaq.Database.Infrastructure
         Task<List<FaqListModel>> GetListFaq();
         Task<bool> RemoveFaqFromList(string faqId);
         Task<RightFaqModel> GetSingleFaq(string FaqId);
+        Task<bool> SaveSingleFaq(string faqId, string searchWords, string Answer);
     }
 }

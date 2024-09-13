@@ -206,7 +206,6 @@ namespace BlazorHrFaq.Database.Infrastructure
                 else
                 {
                     model.Answer = result.Answer;
-                    model.FaqId = result.FaqId;
                     model.SearchWord = result.SearchWords;
                 }
                 return model;
@@ -272,6 +271,24 @@ namespace BlazorHrFaq.Database.Infrastructure
             using (var db = new DatabaseDb())
             {
                 return (settingRemoveMatch) ? true : false;
+            }
+        }
+
+        public async Task<bool> SaveSingleFaq(string faqId, string searchWords, string Answer)
+        {
+            using (var db = new DatabaseDb())
+            {
+                var returneData = false;
+                Guid guidId = new Guid(faqId);
+                var result = await db.Faq.FirstOrDefaultAsync(r => r.FaqId == guidId);
+                if(result != null)
+                {
+                    result.Answer = Answer;
+                    result.SearchWords = searchWords;
+                    int saveinDatabase = await db.SaveChangesAsync();
+                    returneData = (saveinDatabase > 1) ? true : false;
+                }
+                return returneData;
             }
         }
 
