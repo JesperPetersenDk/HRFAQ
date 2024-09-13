@@ -360,6 +360,7 @@ namespace Service
                 {
                     result.Data = new ResponseModel()
                     {
+                        MessegeTouser = $"Der er sket en fejl som gøre at den ikke kunne blive opdateret.",
                         Message = $"Failed to update from database in Faq Single",
                         Status = EnumStatusValue.Failed,
                     };
