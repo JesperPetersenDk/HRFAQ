@@ -1,4 +1,5 @@
 ﻿@page "/answer"
+@using HrFaq.Application.Model
 
 @inject ILoggningService _log
 @inject IFaqService _faq
@@ -34,30 +35,36 @@
             @TextHelperResFile.AddInformation
         </button>
     </div>
-    @* @if (modelList.Count() > 0)
+    @if (list.Count() > 0)
     {
         <div class="mt-3">
             <table class="table-auto">
                 <thead>
                     <tr>
-                        <th>Kode</th>
-                        <th>Link</th>
-                        <th>Tekst</th>
+                        <th>Oprettelse</th>
+                        <th>Søg efter antal gange</th>
+                        <th>Søge ord</th>
+                        <th>Svar</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var item in modelList)
+                    @foreach (var item in list)
                     {
                         <tr>
-                            <td class="px-4 py-2">@item.CodeValue</td>
-                            <td class="px-4 py-2">@item.Value</td>
-                            <td class="px-4 py-2">@item.Text</td>
+                            <td class="px-4 py-2">@item.CreateDatetime</td>
+                            <td class="px-4 py-2">@item.HitCount</td>
+                            <td class="px-4 py-2">@item.SearchWords</td>
+                            <td class="px-4 py-2">@item.Answer</td>
+                            <td class="px-4 py-2">
+                                <a href="/removefaq/@item.FaqId" class="mb-1 mr-1 rounded-2xl bg-red-500 p-2 text-white hover:bg-red-600">Fjern</a>
+                            </td>
                         </tr>
                     }
                 </tbody>
             </table>
         </div>
-    } *@
+    }
 </EditForm>
 
 @code {
@@ -68,6 +75,8 @@
             SearchWords = string.Empty
         };
 
+    public List<FaqListModel> list { get; set; } = new List<FaqListModel>();
+
     public bool searchData { get; set; } = false;
     public EnumStatusValue status { get; set; }
     public string message { get; set; } = string.Empty;
@@ -75,6 +84,26 @@
     protected override async Task OnInitializedAsync()
     {
         _log.Log("User show the page. - Answer page", EnumStatusValue.Info);
+
+        var result = await _faq.GetAllFaq();
+        if(result != null)
+        {
+            var castData = result.GetData.Cast<FaqListModel>().ToList();
+            if(castData != null)
+            {
+                foreach (var item in castData)
+                {
+                    list.Add(new FaqListModel
+                    {
+                        Answer = item.Answer,
+                        CreateDatetime = item.CreateDatetime,
+                        FaqId = item.FaqId,
+                        HitCount = item.HitCount,
+                        SearchWords = item.SearchWords
+                    });
+                }
+            }
+        }
     }
 
     private async Task HandleSubmitMatch()

@@ -1,5 +1,6 @@
 ﻿
 
+using HrFaq.Application.Model;
 using Model;
 
 namespace HrFaq.Database.Infrastructure
@@ -16,5 +17,7 @@ namespace HrFaq.Database.Infrastructure
         Task<string> FindMatchWordReplaceToLink(string codeValueInput, bool targetLink);
         Task AddQuestionStatus(string text, bool settingsBool);
         Task<bool> StatusRapport(bool settingStatusRapport);
+        Task<List<FaqListModel>> GetListFaq();
+        Task<bool> RemoveFaqFromList(string faqId);
     }
 }

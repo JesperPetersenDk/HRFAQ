@@ -1,0 +1,17 @@
+﻿@page "/removefaq/{codeValueInput}"
+
+@inject NavigationManager NavManager
+@inject IFaqService settings
+
+@code {
+    [Parameter]
+    public string codeValueInput { get; set; }
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        //await base.OnInitializedAsync();
+        await settings.DeleteFaq(codeValueInput);
+        NavManager.NavigateTo("answer");
+    }
+}
