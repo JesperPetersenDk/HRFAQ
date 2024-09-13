@@ -192,26 +192,6 @@ namespace BlazorHrFaq.Database.Infrastructure
             }
         }
 
-        public async Task<RightFaqModel> GetSingleFaq(string FaqId)
-        {
-            using (var db = new DatabaseDb())
-            {
-                RightFaqModel model = new RightFaqModel();
-                Guid faqIdGuid = new Guid(FaqId);
-                var result = await db.Faq.FirstOrDefaultAsync(r => r.FaqId == faqIdGuid);
-                if(result == null)
-                {
-                    return model;
-                }
-                else
-                {
-                    model.Answer = result.Answer;
-                    model.SearchWord = result.SearchWords;
-                }
-                return model;
-            }
-        }
-
         public async Task<bool> RemoveFaqFromList(string faqId)
         {
             using (var db = new DatabaseDb())
@@ -271,24 +251,6 @@ namespace BlazorHrFaq.Database.Infrastructure
             using (var db = new DatabaseDb())
             {
                 return (settingRemoveMatch) ? true : false;
-            }
-        }
-
-        public async Task<bool> SaveSingleFaq(string faqId, string searchWords, string Answer)
-        {
-            using (var db = new DatabaseDb())
-            {
-                var returneData = false;
-                Guid guidId = new Guid(faqId);
-                var result = await db.Faq.FirstOrDefaultAsync(r => r.FaqId == guidId);
-                if(result != null)
-                {
-                    result.Answer = Answer;
-                    result.SearchWords = searchWords;
-                    int saveinDatabase = await db.SaveChangesAsync();
-                    returneData = (saveinDatabase > 1) ? true : false;
-                }
-                return returneData;
             }
         }
 

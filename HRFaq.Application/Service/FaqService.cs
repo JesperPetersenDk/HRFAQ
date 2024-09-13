@@ -16,8 +16,6 @@ namespace Service
         Task<ResponseModel> GetMatchWord();
         Task<ResponseModel> GetAllFaq();
         Task<ResponseModel> DeleteFaq(string faqId);
-        Task<ResponseModel> GetSingleById(string faqId);
-        Task<ResponseModel> UpdateFaq(string faqId, string searchWord, string answer);
     }
 
     public class FaqService : IFaqService
@@ -290,82 +288,6 @@ namespace Service
                     };
                 }
                 
-            }
-            catch (Exception ex)
-            {
-                result.Data = new ResponseModel()
-                {
-                    MessegeTouser = $"Der er sket en fejl prøv igen. Fejl besked: {ex.Message}",
-                    Message = $"{ex.Message} - {ex}",
-                    Status = EnumStatusValue.Error,
-                };
-            }
-            return result.Data;
-        }
-
-        public async Task<ResponseModel> GetSingleById(string faqId)
-        {
-            var result = new ResponseDataModel();
-            try
-            {
-                var resultData = await _com.GetSingleFaq(faqId);
-                if (resultData.SearchWord != null && resultData.Answer != null)
-                {
-                    RightFaqModel model = new RightFaqModel();
-                    model.Answer = resultData.Answer;
-                    model.SearchWord = resultData.SearchWord;
-                    result.Data = new ResponseModel()
-                    {
-                        Message = $"Get SINGLE from Faq",
-                        Status = EnumStatusValue.Success,
-                        GetData = new[] { model }
-                    };
-                }
-                else
-                {
-                    result.Data = new ResponseModel()
-                    {
-                        Message = $"Failed - Null with SearchWord or Answer",
-                        Status = EnumStatusValue.Failed,
-                    };
-                }
-            }
-            catch (Exception ex)
-            {
-                result.Data = new ResponseModel()
-                {
-                    MessegeTouser = $"Der er sket en fejl prøv igen. Fejl besked: {ex.Message}",
-                    Message = $"{ex.Message} - {ex}",
-                    Status = EnumStatusValue.Error,
-                };
-            }
-            return result.Data;
-        }
-
-        public async Task<ResponseModel> UpdateFaq(string faqId, string searchWord, string answer)
-        {
-            var result = new ResponseDataModel();
-            try
-            {
-                var resultData = await _com.SaveSingleFaq(faqId, searchWord, answer);
-                if (resultData)
-                {
-                    result.Data = new ResponseModel()
-                    {
-                        Message = $"Success to update in Database with Faq Single",
-                        Status = EnumStatusValue.Success,
-                    };
-                }
-                else
-                {
-                    result.Data = new ResponseModel()
-                    {
-                        MessegeTouser = $"Der er sket en fejl som gøre at den ikke kunne blive opdateret.",
-                        Message = $"Failed to update from database in Faq Single",
-                        Status = EnumStatusValue.Failed,
-                    };
-                }
-
             }
             catch (Exception ex)
             {
