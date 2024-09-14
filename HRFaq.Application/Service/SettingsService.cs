@@ -1,4 +1,5 @@
 ﻿using Helpers.ResponseModel;
+using HrFaq.Application.Model;
 using HrFaq.Database.Infrastructure;
 using Microsoft.Extensions.Configuration;
 using Model;
@@ -10,6 +11,7 @@ namespace Service
         Task<ResponseModel> RemoveMatchWordStatus();
         Task<ResponseModel> RemoveMatchWordsFromContent(string codeValue);
         Task<ResponseModel> StatusRapport();
+        Task<ResponseModel> LettersSetting();
     }
 
     public class SettingsService : ISettingsService
@@ -21,7 +23,47 @@ namespace Service
             _com = command;
             _configuration = configuration;
         }
-        
+
+        public async Task<ResponseModel> LettersSetting()
+        {
+            var result = new ResponseDataModel();
+            try
+            {
+                LettersSettingModel model = new LettersSettingModel();
+                model.After = _configuration.GetSection("LettersSetting:after").Value.ToString() ?? "";
+                model.Count = Convert.ToInt16(_configuration.GetSection("LettersSetting:count").Value);
+
+                if(model.Count > 0)
+                {
+                    result.Data = new ResponseModel()
+                    {
+                        Message = "Letters Setting returne information",
+                        Status = EnumStatusValue.Success,
+                        GetData = new[] {model}
+                    };
+                }
+                else
+                {
+                    result.Data = new ResponseModel()
+                    {
+                        Message = "Letters Setting Count 0",
+                        Status = EnumStatusValue.Failed,
+                    };
+                }
+
+            }
+            catch (Exception ex)
+            {
+                result.Data = new ResponseModel()
+                {
+                    MessegeTouser = $"Der kunne ikke blive hentet indhold - Fejl besked {ex.Message}",
+                    Message = $"{ex.Message} - {ex}",
+                    Status = EnumStatusValue.Error,
+                };
+            }
+            return result.Data;
+        }
+
         public async Task<ResponseModel> RemoveMatchWordsFromContent(string codeValueInput)
         {
             var result = new ResponseDataModel();
