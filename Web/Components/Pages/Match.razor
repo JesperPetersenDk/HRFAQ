@@ -1,5 +1,6 @@
 ﻿@page "/matchword"
 
+
 @inject ILoggningService _log
 @inject IFaqService _faq
 @inject ISettingsService setting
@@ -54,8 +55,8 @@
                 <tbody>
                     @foreach (var item in modelList)
                     {
-                        int lengthCount = 35;
-                        string textValue = (item.Value.Length > lengthCount) ? item.Value.Substring(0, lengthCount) + "..." : item.Value;
+                        int lengthCount = modelLetters.Count;
+                        string textValue = (item.Value.Length > lengthCount) ? item.Value.Substring(0, lengthCount) + modelLetters.After : item.Value;
                         <tr>
                             @if (StatusMatchWord)
                             {
@@ -90,7 +91,7 @@
     public string message { get; set; } = string.Empty;
     public bool StatusMatchWord { get; set; } = false;
 
-
+    LettersSettingModel modelLetters = new LettersSettingModel();
     MatchViewModel model = new MatchViewModel();
     List<MatchListViewModel> modelList = new List<MatchListViewModel>();
 
@@ -99,7 +100,8 @@
         _log.Log("User show the page. - Match Page", EnumStatusValue.Info);
         await base.OnInitializedAsync();
         var resultData = await _faq.GetMatchWord();
-        if (resultData.Status == EnumStatusValue.Success)
+        var LettersSettingData = await setting.LettersSetting();
+        if (resultData.Status == EnumStatusValue.Success && LettersSettingData.Status == EnumStatusValue.Success)
         {
             var dataResult = resultData.GetData.Cast<MatchViewModel>().FirstOrDefault();
             if (dataResult != null)
@@ -118,6 +120,13 @@
                             });
                     }
                 }
+            }
+
+            var castLettersData = LettersSettingData.GetData.Cast<LettersSettingModel>().FirstOrDefault();
+            if(castLettersData != null)
+            {
+                modelLetters.After = castLettersData.After;
+                modelLetters.Count = castLettersData.Count;
             }
         }
 
