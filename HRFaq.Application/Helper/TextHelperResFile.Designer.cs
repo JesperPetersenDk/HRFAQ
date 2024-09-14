@@ -88,6 +88,15 @@ namespace HrFaq.Application.Helper {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Tilføj svaret..
+        /// </summary>
+        public static string AnswerButton {
+            get {
+                return ResourceManager.GetString("AnswerButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Spørgsmålet som bruger stiller. Du kan lave flere ved at bruge &quot; , &quot;.
         /// </summary>
         public static string InputAnswer {

@@ -126,6 +126,9 @@
   <data name="AddValue" xml:space="preserve">
     <value>Tilføj url til billede, link eller PDF.</value>
   </data>
+  <data name="AnswerButton" xml:space="preserve">
+    <value>Tilføj svaret.</value>
+  </data>
   <data name="InputAnswer" xml:space="preserve">
     <value>Spørgsmålet som bruger stiller. Du kan lave flere ved at bruge " , "</value>
   </data>
