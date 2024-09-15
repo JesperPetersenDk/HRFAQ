@@ -23,6 +23,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Helper\PageInformation.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>PageInformation.resx</DependentUpon>
+    </Compile>
     <Compile Update="Helper\TextHelperResFile.Designer.cs">
       <DependentUpon>TextHelperResFile.resx</DependentUpon>
       <DesignTime>True</DesignTime>
@@ -31,6 +36,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Update="Helper\PageInformation.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>PageInformation.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Update="Helper\TextHelperResFile.resx">
       <LastGenOutput>TextHelperResFile.Designer.cs</LastGenOutput>
       <Generator>PublicResXFileCodeGenerator</Generator>
