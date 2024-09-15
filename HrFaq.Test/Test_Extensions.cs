@@ -1,6 +1,6 @@
 namespace HrFaq.Helper.Xunit
 {
-    public class UnitTest_Extensions
+    public class Test_Extensions
     {
         [Fact]
         public void FormatFileType_Url_ReturnsCorrectFormat()
