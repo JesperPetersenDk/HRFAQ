@@ -1,6 +1,8 @@
 ﻿@page "/answer"
 @using HrFaq.Application.Model
 
+<TitlePage Title="@PageInformation.AnswerPage.ReplaceText(null)" />
+
 @inject ILoggningService _log
 @inject IFaqService _faq
 @inject NavigationManager nav
