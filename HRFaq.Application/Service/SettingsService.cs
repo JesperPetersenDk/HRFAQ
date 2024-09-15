@@ -30,10 +30,19 @@ namespace Service
             try
             {
                 LettersSettingModel model = new LettersSettingModel();
-                model.After = _configuration.GetSection("LettersSetting:after").Value.ToString() ?? "";
-                model.Count = Convert.ToInt16(_configuration.GetSection("LettersSetting:count").Value);
 
-                if(model.Count > 0)
+                var afterValue = _configuration.GetSection("LettersSetting:after").Value;
+                var countValue = _configuration.GetSection("LettersSetting:count").Value;
+
+                if (afterValue == null || countValue == null)
+                {
+                    throw new Exception("Configuration sections 'LettersSetting:after' or 'LettersSetting:count' are missing or null.");
+                }
+
+                model.After = afterValue.ToString();
+                model.Count = Convert.ToInt16(countValue);
+
+                if (model.Count > 0)
                 {
                     result.Data = new ResponseModel()
                     {
