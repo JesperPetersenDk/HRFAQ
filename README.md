@@ -23,10 +23,9 @@ Der er som udgangspunkt ingen Integrationer til andre system.
 - Oprettelse af "Match word" som kan bruges flere steder.
 
 #### Functions (the future)
-- Log ind system - Bruger skal log ind med sin bruger.
+- Log ind system - Bruger skal log ind med sin bruger. (Undersøge hvilket form for log ind der skal bruges)
 - Rapport om hvor mange spørgsmål der bliver stillet
 - Flere svare eller kun et svar tilbage (Admin bestemmer)
-- Vil kunne opdele kategori i forhold til ens arbejdes område.
 
 #### Development
 Der er gjort brug af disse her:
