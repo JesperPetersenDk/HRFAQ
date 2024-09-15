@@ -52,20 +52,26 @@ namespace BlazorHrFaq.Database.Infrastructure
         {
             using(var db = new DatabaseDb())
             {
-                var list = new List<Tuple<string, int>>();
                 var resultData = await db.Faq
-                            .Where(r => r.SearchWords.Contains(text))
-                            .ToListAsync(); // Sorter efter Priority fra højeste til laveste
-                if(resultData != null)
+                    .Where(r => r.SearchWords.Contains(text))
+                    .ToListAsync(); // Sorter efter Priority fra højeste til laveste
+
+                if (resultData?.Any() == true)
                 {
-                    foreach(var result in resultData)
-                    {
-                        result.HitCount++;
-                        await db.SaveChangesAsync();
-                        list.Add(new Tuple<string, int>(result.Answer, result.HitCount ?? 0));
-                    }
+                    // Opdater HitCount for alle poster
+                    resultData.ForEach(r => r.HitCount++);
+                    await db.SaveChangesAsync(); // Gem ændringer én gang
+
+                    // Opret liste af svar og HitCount direkte med Select
+                    var list = resultData
+                        .Select(r => new Tuple<string, int>(r.Answer, r.HitCount ?? 0))
+                        .ToList();
+
+                    return list;
                 }
-                return list;                
+
+                return new List<Tuple<string, int>>(); // Returner tom liste hvis der ikke var nogen resultater
+
             }
         }
 
