@@ -11,6 +11,7 @@ namespace Service
         Task<ResponseModel> RemoveMatchWordStatus();
         Task<ResponseModel> RemoveMatchWordsFromContent(string codeValue);
         Task<ResponseModel> StatusRapport();
+        Task<ResponseModel> ShowStatusRapport();
         Task<ResponseModel> LettersSetting();
     }
 
@@ -134,6 +135,11 @@ namespace Service
                 };
             }
             return result.Data;
+        }
+
+        public Task<ResponseModel> ShowStatusRapport()
+        {
+            throw new NotImplementedException();
         }
 
         public async Task<ResponseModel> StatusRapport()

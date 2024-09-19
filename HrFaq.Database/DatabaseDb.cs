@@ -10,6 +10,7 @@ namespace BlazorHrFaq.Database
         public DbSet<Faq> Faq { get; set; }
         public DbSet<MatchData> Match { get; set; }
         public DbSet<SettingInfo> SettingInfo { get; set; }
+        public DbSet<StatusRapport> StatusRapport { get; set; }
         public DatabaseDb(DbContextOptions<DatabaseDb> options) : base(options)
         {
 
@@ -34,6 +35,7 @@ namespace BlazorHrFaq.Database
             modelBuilder.Entity<MatchData>().HasKey(r => r.MatchId);
 
             modelBuilder.Entity<Faq>().HasKey(r => r.FaqId);
+            modelBuilder.Entity<StatusRapport>().HasKey(r => r.StatusId);
 
 
             modelBuilder.Entity<SettingInfo>().HasKey(r => r.SettingInfoId);
